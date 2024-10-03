@@ -1,8 +1,8 @@
-# Group TEAM_NUMBER
+# Group 20
 Group Name: TEAM_NAME
 
-[MVP Link](https://docs.google.com/document/d/1xFI9DDdO5HZAcu36Y6NL-RTDry5E3WHkfy-ZEWuqbXM/edit?usp=sharing)
+[MVP Link](https://docs.google.com/document/d/1WQh7POJNbYzxMcqmRgpXdiSSUHRIHtX-/edit?usp=sharing&ouid=104702159193716088633&rtpof=true&sd=truela)
 
-Team Members: STUDENTS_NETIDS
+Team Members: laharia2, ekula, wllei2, cholach2, mlb17, rmchen3, shrestd2, tedroh2
 
-Project Manager: PM_NETID
+Project Manager: dhanish2
