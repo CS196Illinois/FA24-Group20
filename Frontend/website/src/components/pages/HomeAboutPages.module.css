@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Danfo&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 .titleStyle {
-    color: aliceblue;
+    color: #F2E9E4;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     font-size: 150px;
     font-weight: 300;
     text-align: center;
-    display:block;
-    padding-top: 150px;
+    display: block;
+    padding-top: 20px;
     padding-bottom: 0px;  
 }
 
 .aboutTitleStyle {
-    color: aliceblue;
+    color: #F2E9E4;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     background-color: #221f26;
     font-size: 120px;
@@ -24,7 +24,7 @@
 }
 
 .ourMissionStyle {
-    color: aliceblue;
+    color: #F2E9E4;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     font-size: 90px;
     font-weight: 300;
@@ -39,7 +39,7 @@
 .paragraphContent {
     text-align: center;
     background-color: #221f26;
-    color: aliceblue;
+    color: #F2E9E4;
     padding-top: 20px;
     padding-bottom: 100px;
     font-family: "Nunito Sans", Helvetica, sans-serif;
@@ -50,7 +50,7 @@
 
 .textContent2 {
     text-align: left;
-    color: aliceblue;
+    color: #F2E9E4;
     padding-top: 20px;
     padding-bottom: 70px;
     padding-left: 50px;
@@ -65,7 +65,7 @@
     position: relative;
     top: -15px;
     letter-spacing: 4px;
-    color:aliceblue;
+    color: #F2E9E4;
     text-align: center;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     font-weight: 200;
@@ -74,35 +74,68 @@
 }  
 
 .button_1 {
+    margin: auto;
     border: none;
-    color: aliceblue;
-    text-align: center;
+    color: #F2E9E4;
     text-decoration: none;
     display: inline-block;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     font-size: 18px;
-    margin: 0px 14px;
     transition-duration: 0.4s;
     cursor: pointer;
     background-color: #2e2e37;
-    border: 2px solid aliceblue;
+    border: 2px solid #F2E9E4;
+    padding: 1vw;
 }
 
 .button_1:hover {
-    background-color: aliceblue;
+    background-color: #F2E9E4;
     color: #2e2e37;
 }
 
+.buttonBox {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    text-align: center;
+    margin-top: 0.9%;
+}   
+
 .left_button {
-    padding: 16px 32px;
-    position: relative;
-    left: 525px;
-    top: 20px;
+    margin:auto;
+    margin-left: -1%;
 }
 
 .right_button {
-    padding: 16px 46px;
-    position: relative;
-    left: 575px;
-    top: 20px;  
+    margin:auto;
+    margin-left: 2vw;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4.5%;
+    width: 9%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background:  #F2E9E4;
+    border-radius: 50px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #d18e7d;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b75b56;
+    border-radius: 50px;
 }
