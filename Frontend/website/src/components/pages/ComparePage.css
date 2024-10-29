@@ -1,5 +1,11 @@
 :root {
-    --width: 0%;
+    --contrast-width: 0%;
+    --sentiment-width1: 0%;
+    --sentiment-width2: 0%;
+    --sentiment-color1: #EF3D3D;
+    --sentiment-color2: #EF3D3D;
+    --sentiment-top-right-border1: "";
+    --sentiment-top-right-border2: "";
     --shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     --top-spacing: 1vw;
 }
@@ -45,7 +51,7 @@
     position:relative;
     top: -75%;
     height: 100%;
-    width: var(--width);
+    width: var(--contrast-width);
     background-color: #6A4A83;
     border-radius: inherit;
 }
@@ -103,6 +109,7 @@
 }
 
 .articlePane {
+    z-index: 0;
     display: inline;
     height: 23vw;
     width: 44.88vw;
@@ -110,4 +117,63 @@
     margin-left: 3.125vw;
     margin-top: var(--top-spacing);
     background-color: #393E48;
+    box-shadow: var(--shadow)
+}
+
+.sentimentContainer1 {
+    z-index: 1;
+    height: 20px;
+    width: inherit;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: #F2E9E4;
+    text-align: center;
+}
+
+.sentimentContainer2 {
+    z-index: 1;
+    height: 20px;
+    width: inherit;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: #F2E9E4;
+    text-align: center;
+}
+
+.sentimentText1 {
+    z-index: 3;
+    position:relative;
+    top: 0%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+.sentimentText2 {
+    z-index: 3;
+    position:relative;
+    top: 0%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+.sentimentFiller1 {
+    z-index: 2;
+    position:relative;
+    top: -92%;
+    height: 100%;
+    width: var(--sentiment-width1);
+    background-color: var(--sentiment-color1);
+    border-top-left-radius: inherit;
+    border-top-right-radius: var(--sentiment-top-right-border1);
+}
+
+.sentimentFiller2 {
+    z-index: 2;
+    position:relative;
+    top: -92%;
+    height: 100%;
+    width: var(--sentiment-width2);
+    background-color: var(--sentiment-color2);
+    border-top-left-radius: inherit;
+    border-top-right-radius: var(--sentiment-top-right-border2);
 }
