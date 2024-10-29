@@ -129,6 +129,39 @@ function ContrastBar({ percent }) {
 	);
 }
 
+function ArticleSentimentBar1() {
+    return(
+       <div className='sentimentBar1'>
+
+       </div>
+    );
+}
+
+function ArticleSentimentBar2() {
+    return(
+       <div className='sentimentBar2'>
+        
+       </div>
+    );
+}
+
+
+function ArticlePane1() {
+    return(
+        <div className='articlePane'>
+            
+        </div>
+    );
+}
+
+function ArticlePane2() {
+    return(
+        <div className='articlePane'>
+            
+        </div>
+    );
+}
+
 function Compare() {
 	return (
 		<div>
@@ -151,7 +184,10 @@ function Compare() {
 				</ul>
 			</div>
 			<ContrastBar percent={56} />
-
+            <div className = 'articlePaneBox'>
+                <ArticlePane1 />
+                <ArticlePane2 />
+            </div>
 		</div>
 	);
 }
