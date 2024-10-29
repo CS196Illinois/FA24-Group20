@@ -12,15 +12,17 @@ def scrapeURL(my_url):
         soup = BeautifulSoup(page.text, 'html.parser')
         heading = soup.find('h1').get_text()
         content = soup.find_all('p')
+        str_content = []
         error = None
         
         print("====================HEADING====================")
         print(heading)
         print("====================CONTENT====================")
         for paragraph in content:
+            str_content.append(paragraph.get_text())
             print(paragraph.get_text())
         
-        return heading, content, error
+        return heading, str_content, error
     else:
         error = 'Failed to get page contents.'
         print("Failed to get page contents.")
@@ -34,11 +36,13 @@ def scrapeHTMLFile(my_html_file):
     soup = BeautifulSoup(page, 'html.parser')
     heading = soup.find('h1').get_text()
     content = soup.find_all('p')
+    str_content = []
     
     print("====================HEADING====================")
     print(heading.get_text())
     print("====================CONTENT====================")
     for paragraph in content:
+        str_content.append(paragraph.get_text())
         print(paragraph.get_text())
     
-    return heading, content
+    return heading, str_content
