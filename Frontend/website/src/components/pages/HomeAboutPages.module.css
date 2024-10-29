@@ -41,7 +41,7 @@
     background-color: #221f26;
     color: aliceblue;
     padding-top: 20px;
-    padding-bottom: 70px;
+    padding-bottom: 100px;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     letter-spacing: 4px;
     font-weight: 100;
@@ -56,7 +56,8 @@
     padding-left: 50px;
     font-family: "Nunito Sans", Helvetica, sans-serif;
     letter-spacing: 4px;
-    font-weight: 100;
+    line-height: 40px;
+    font-weight: 200;
     font-size: 25px;
 }
 
