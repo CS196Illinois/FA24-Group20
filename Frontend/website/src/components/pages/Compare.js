@@ -1,3 +1,7 @@
+/**
+ * @author William Lei &lt;wllei2@illinois.edu>
+ */
+
 import "./ComparePage.css";
 import React, { useState } from "react";
 
@@ -107,20 +111,23 @@ function ContrastBar({ percent }) {
 		"Strong Contrast ",
 	];
 	var contrast = "";
-	if (percent < 20) {
+	if (percentage < 20) {
 		contrast = contrastLevels[0];
-	} else if (percent < 40) {
+	} else if (percentage < 40) {
 		contrast = contrastLevels[1];
-	} else if (percent < 60) {
+	} else if (percentage < 60) {
 		contrast = contrastLevels[2];
-	} else if (percent < 80) {
+	} else if (percentage < 80) {
 		contrast = contrastLevels[3];
-	} else if (percent <= 100) {
+	} else if (percentage <= 100) {
 		contrast = contrastLevels[4];
 	}
 	var r = document.querySelector(":root");
-	r.style.setProperty("--width", `${percentage}%`);
-
+    if(percentage < 2) {
+	    r.style.setProperty("--contrast-width", `2%`);
+    } else {
+        r.style.setProperty("--contrast-width", `${percentage}%`);
+    }
 	return (
 		<div className='contrastContainer'>
 			<span className='contrastText'>{`${contrast} (${percentage}%)`}</span>
@@ -129,35 +136,158 @@ function ContrastBar({ percent }) {
 	);
 }
 
-function ArticleSentimentBar1() {
-    return(
-       <div className='sentimentBar1'>
+function ArticleSentimentBar1({ percent }) {
+    const percentage = percent
+    const sentimentLevels = [
+		"Strongly Left-Leaning ",
+        "Moderately Strongly Left-Leaning ",
+        "Moderately Left-Leaning ",
+        "Moderately Weakly Left-Leaning ",
+        "Weakly Left-Leaning ",
+        "Neither Left Nor Right-Leaning ",
+        "Weakly Right-Leaning ",
+        "Moderately Weakly Right-Leaning ",
+        "Moderately Right-Leaning ",
+        "Moderately Strongly Right-Leaning ",
+        "Strongly Right-Leaning "
+	];
 
+    var sentiment = "";
+    if(percentage < -80) {
+        sentiment = sentimentLevels[0]
+    } else if (percentage < -60) {
+        sentiment = sentimentLevels[1]
+    } else if (percentage < -40) {
+        sentiment = sentimentLevels[2]
+    } else if (percentage < -20) {
+        sentiment = sentimentLevels[3]
+    }  else if (percentage < -1) {
+        sentiment = sentimentLevels[4]
+    } else if (-1 <= percentage && percentage <= 1) {
+        sentiment = sentimentLevels[5]
+    } else if (percentage < 20) {
+        sentiment = sentimentLevels[6]
+    } else if (percentage < 40) {
+        sentiment = sentimentLevels[7]
+    } else if (percentage < 60) {
+        sentiment = sentimentLevels[8]
+    } else if (percentage < 80) {
+        sentiment = sentimentLevels[9]
+    } else if (percentage <= 100) {
+        sentiment = sentimentLevels[10]
+    }
+
+    var r = document.querySelector(":root");
+    var color = "";
+    var topRightBorder = "";
+    if(percentage >= 0) {
+        color = "#EF3D3D";
+    } else {
+        color = "#58A3F4";
+    }
+    if(Math.abs(percentage) >= 98.5) {
+        topRightBorder = "10px";
+    } else {
+        topRightBorder = "0px";
+    }
+    r.style.setProperty("--sentiment-top-right-border1", `${topRightBorder}`);
+	if((-2 <= percentage && percentage < 0) || (0 < percentage && percentage <= 2)) {
+	    r.style.setProperty("--sentiment-width1", `2%`);
+    } else {
+        r.style.setProperty("--sentiment-width1", `${Math.abs(percentage)}%`);
+    }
+    r.style.setProperty("--sentiment-color1", `${color}`);
+    
+    return(
+       <div className='sentimentContainer1'>
+            <span className='sentimentText1'>{`${sentiment} (${Math.abs(percentage)}%)`}</span>
+            <div className='sentimentFiller1' />
        </div>
     );
 }
 
-function ArticleSentimentBar2() {
+function ArticleSentimentBar2({ percent }) {
+    const percentage = percent
+    const sentimentLevels = [
+		"Strongly Left-Leaning ",
+        "Moderately Strongly Left-Leaning ",
+        "Moderately Left-Leaning ",
+        "Moderately Weakly Left-Leaning ",
+        "Weakly Left-Leaning ",
+        "Neither Left Nor Right-Leaning ",
+        "Weakly Right-Leaning ",
+        "Moderately Weakly Right-Leaning ",
+        "Moderately Right-Leaning ",
+        "Moderately Strongly Right-Leaning ",
+        "Strongly Right-Leaning "
+	];
+
+    var sentiment = "";
+    if(percentage < -80) {
+        sentiment = sentimentLevels[0]
+    } else if (percentage < -60) {
+        sentiment = sentimentLevels[1]
+    } else if (percentage < -40) {
+        sentiment = sentimentLevels[2]
+    } else if (percentage < -20) {
+        sentiment = sentimentLevels[3]
+    }  else if (percentage < -1) {
+        sentiment = sentimentLevels[4]
+    } else if (-1 <= percentage && percentage <= 1) {
+        sentiment = sentimentLevels[5]
+    } else if (percentage < 20) {
+        sentiment = sentimentLevels[6]
+    } else if (percentage < 40) {
+        sentiment = sentimentLevels[7]
+    } else if (percentage < 60) {
+        sentiment = sentimentLevels[8]
+    } else if (percentage < 80) {
+        sentiment = sentimentLevels[9]
+    } else if (percentage <= 100) {
+        sentiment = sentimentLevels[10]
+    }
+
+    var r = document.querySelector(":root");
+    var color = "";
+    var topRightBorder = "";
+    if(percentage >= 0) {
+        color = "#EF3D3D";
+    } else {
+        color = "#58A3F4";
+    }
+    if(Math.abs(percentage) >= 98.5) {
+        topRightBorder = "10px";
+    } else {
+        topRightBorder = "0px";
+    }
+    r.style.setProperty("--sentiment-top-right-border2", `${topRightBorder}`);
+    if((-2 <= percentage && percentage < 0) || (0 < percentage && percentage <= 2)) {
+	    r.style.setProperty("--sentiment-width2", `2%`);
+    } else {
+        r.style.setProperty("--sentiment-width2", `${Math.abs(percentage)}%`);
+    }
+    r.style.setProperty("--sentiment-color2", `${color}`);
+    
     return(
-       <div className='sentimentBar2'>
-        
+       <div className='sentimentContainer2'>
+            <span className='sentimentText2'>{`${sentiment} (${Math.abs(percentage)}%)`}</span>
+            <div className='sentimentFiller2' />
        </div>
     );
 }
 
-
-function ArticlePane1() {
+function ArticlePane1({ percent }) {
     return(
         <div className='articlePane'>
-            
+            <ArticleSentimentBar1 percent={percent} />
         </div>
     );
 }
 
-function ArticlePane2() {
+function ArticlePane2({ percent }) {
     return(
         <div className='articlePane'>
-            
+            <ArticleSentimentBar2 percent={percent}/>
         </div>
     );
 }
@@ -183,10 +313,10 @@ function Compare() {
 					</li>
 				</ul>
 			</div>
-			<ContrastBar percent={56} />
+			<ContrastBar percent={0.1} />
             <div className = 'articlePaneBox'>
-                <ArticlePane1 />
-                <ArticlePane2 />
+                <ArticlePane1 percent={-1.2}/>
+                <ArticlePane2 percent={-0.1}/>
             </div>
 		</div>
 	);
