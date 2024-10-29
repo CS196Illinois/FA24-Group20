@@ -1,0 +1,99 @@
+:root {
+    --width: 0%;
+    --shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    --top-spacing: 1vw
+}
+
+.upload {
+    display: flex;
+}
+
+.upload ul {
+    display: flex;
+    min-width: 0;
+    list-style: none;
+    margin-right: 0.1vw;
+}
+
+.upload ul li {
+    display: inline-block;
+    margin-top: var(--top-spacing);
+    margin-bottom: var(--top-spacing);
+    min-width: 0;
+}
+
+.contrastContainer {
+    height: 25px;
+    width: 93vw;
+    background-color: #393E48;
+    border-radius: 50px;
+    margin-left: 3.125vw;
+    text-align: center;
+    box-shadow: var(--shadow)
+}
+
+.contrastText {
+    z-index: 999;
+    position:relative;
+    top: 14%;
+    transform: translateY(-50%);
+    color: #F2E9E4;
+    font-weight: bold;
+}
+
+.contrastFiller {
+    position:relative;
+    top: -75%;
+    height: 100%;
+    width: var(--width);
+    background-color: #6A4A83;
+    border-radius: inherit;
+}
+
+.urlBox {
+    margin-left: 3.125vw;
+    margin-right: 0.9vw;
+    border-style: none;
+    width: 42vw;
+    height: 25px;
+    background-color: #393E48;
+    font-size: 30;
+    color: #D3CFCE;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.urlBox::placeholder {
+    color: #D3CFCE;
+    padding-left: 10px; 
+    padding-right: 10px;
+    font-size: 30;
+    font-style: italic;
+    text-align: center;
+}
+
+.fileIcon input {
+    display: none;
+}
+
+.fileIconSquare {
+    width: 25px;
+    height: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #393E48;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+.fileIconSquare:hover{
+    background-color: #292c32;
+    filter: contrast(90%);
+    cursor: pointer;
+}
+
+.fileIconSquare img {
+    margin-left: 7px;
+    margin-top: 4.5px;
+}
