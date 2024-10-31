@@ -123,11 +123,18 @@ function ContrastBar({ percent }) {
 		contrast = contrastLevels[4];
 	}
 	var r = document.querySelector(":root");
-    if(percentage < 2) {
-	    r.style.setProperty("--contrast-width", `2%`);
-    } else {
-        r.style.setProperty("--contrast-width", `${percentage}%`);
-    }
+	var rightBorder = "";
+	if (percentage >= 98.5) {
+		rightBorder = "50px";
+	} else {
+		rightBorder = "0px";
+	}
+	r.style.setProperty("--contrast-border", `${rightBorder}`);
+	if (percentage < 2) {
+		r.style.setProperty("--contrast-width", `2%`);
+	} else {
+		r.style.setProperty("--contrast-width", `${percentage}%`);
+	}
 	return (
 		<div className='contrastContainer'>
 			<span className='contrastText'>{`${contrast} (${percentage}%)`}</span>
@@ -137,159 +144,192 @@ function ContrastBar({ percent }) {
 }
 
 function ArticleSentimentBar1({ percent }) {
-    const percentage = percent
-    const sentimentLevels = [
+	const percentage = percent;
+	const sentimentLevels = [
 		"Strongly Left-Leaning ",
-        "Moderately Strongly Left-Leaning ",
-        "Moderately Left-Leaning ",
-        "Moderately Weakly Left-Leaning ",
-        "Weakly Left-Leaning ",
-        "Neither Left Nor Right-Leaning ",
-        "Weakly Right-Leaning ",
-        "Moderately Weakly Right-Leaning ",
-        "Moderately Right-Leaning ",
-        "Moderately Strongly Right-Leaning ",
-        "Strongly Right-Leaning "
+		"Moderately Strongly Left-Leaning ",
+		"Moderately Left-Leaning ",
+		"Moderately Weakly Left-Leaning ",
+		"Weakly Left-Leaning ",
+		"Neither Left Nor Right-Leaning ",
+		"Weakly Right-Leaning ",
+		"Moderately Weakly Right-Leaning ",
+		"Moderately Right-Leaning ",
+		"Moderately Strongly Right-Leaning ",
+		"Strongly Right-Leaning ",
 	];
 
-    var sentiment = "";
-    if(percentage < -80) {
-        sentiment = sentimentLevels[0]
-    } else if (percentage < -60) {
-        sentiment = sentimentLevels[1]
-    } else if (percentage < -40) {
-        sentiment = sentimentLevels[2]
-    } else if (percentage < -20) {
-        sentiment = sentimentLevels[3]
-    }  else if (percentage < -1) {
-        sentiment = sentimentLevels[4]
-    } else if (-1 <= percentage && percentage <= 1) {
-        sentiment = sentimentLevels[5]
-    } else if (percentage < 20) {
-        sentiment = sentimentLevels[6]
-    } else if (percentage < 40) {
-        sentiment = sentimentLevels[7]
-    } else if (percentage < 60) {
-        sentiment = sentimentLevels[8]
-    } else if (percentage < 80) {
-        sentiment = sentimentLevels[9]
-    } else if (percentage <= 100) {
-        sentiment = sentimentLevels[10]
-    }
+	var sentiment = "";
+	if (percentage < -80) {
+		sentiment = sentimentLevels[0];
+	} else if (percentage < -60) {
+		sentiment = sentimentLevels[1];
+	} else if (percentage < -40) {
+		sentiment = sentimentLevels[2];
+	} else if (percentage < -20) {
+		sentiment = sentimentLevels[3];
+	} else if (percentage < -1) {
+		sentiment = sentimentLevels[4];
+	} else if (-1 <= percentage && percentage <= 1) {
+		sentiment = sentimentLevels[5];
+	} else if (percentage < 20) {
+		sentiment = sentimentLevels[6];
+	} else if (percentage < 40) {
+		sentiment = sentimentLevels[7];
+	} else if (percentage < 60) {
+		sentiment = sentimentLevels[8];
+	} else if (percentage < 80) {
+		sentiment = sentimentLevels[9];
+	} else if (percentage <= 100) {
+		sentiment = sentimentLevels[10];
+	}
 
-    var r = document.querySelector(":root");
-    var color = "";
-    var topRightBorder = "";
-    if(percentage >= 0) {
-        color = "#EF3D3D";
-    } else {
-        color = "#58A3F4";
-    }
-    if(Math.abs(percentage) >= 98.5) {
-        topRightBorder = "10px";
-    } else {
-        topRightBorder = "0px";
-    }
-    r.style.setProperty("--sentiment-top-right-border1", `${topRightBorder}`);
-	if((-2 <= percentage && percentage < 0) || (0 < percentage && percentage <= 2)) {
-	    r.style.setProperty("--sentiment-width1", `2%`);
-    } else {
-        r.style.setProperty("--sentiment-width1", `${Math.abs(percentage)}%`);
-    }
-    r.style.setProperty("--sentiment-color1", `${color}`);
-    
-    return(
-       <div className='sentimentContainer1'>
-            <span className='sentimentText1'>{`${sentiment} (${Math.abs(percentage)}%)`}</span>
-            <div className='sentimentFiller1' />
-       </div>
-    );
+	var r = document.querySelector(":root");
+	var color = "";
+	var topRightBorder = "";
+	if (percentage >= 0) {
+		color = "#EF3D3D";
+	} else {
+		color = "#58A3F4";
+	}
+	if (Math.abs(percentage) >= 98.5) {
+		topRightBorder = "10px";
+	} else {
+		topRightBorder = "0px";
+	}
+	r.style.setProperty("--sentiment-top-right-border1", `${topRightBorder}`);
+	if (
+		(-2 <= percentage && percentage < 0) ||
+		(0 < percentage && percentage <= 2)
+	) {
+		r.style.setProperty("--sentiment-width1", `2%`);
+	} else {
+		r.style.setProperty("--sentiment-width1", `${Math.abs(percentage)}%`);
+	}
+	r.style.setProperty("--sentiment-color1", `${color}`);
+
+	return (
+		<div className='sentimentContainer1'>
+			<span className='sentimentText1'>{`${sentiment} (${Math.abs(
+				percentage
+			)}%)`}</span>
+			<div className='sentimentFiller1' />
+		</div>
+	);
 }
 
 function ArticleSentimentBar2({ percent }) {
-    const percentage = percent
-    const sentimentLevels = [
+	const percentage = percent;
+	const sentimentLevels = [
 		"Strongly Left-Leaning ",
-        "Moderately Strongly Left-Leaning ",
-        "Moderately Left-Leaning ",
-        "Moderately Weakly Left-Leaning ",
-        "Weakly Left-Leaning ",
-        "Neither Left Nor Right-Leaning ",
-        "Weakly Right-Leaning ",
-        "Moderately Weakly Right-Leaning ",
-        "Moderately Right-Leaning ",
-        "Moderately Strongly Right-Leaning ",
-        "Strongly Right-Leaning "
+		"Moderately Strongly Left-Leaning ",
+		"Moderately Left-Leaning ",
+		"Moderately Weakly Left-Leaning ",
+		"Weakly Left-Leaning ",
+		"Neither Left Nor Right-Leaning ",
+		"Weakly Right-Leaning ",
+		"Moderately Weakly Right-Leaning ",
+		"Moderately Right-Leaning ",
+		"Moderately Strongly Right-Leaning ",
+		"Strongly Right-Leaning ",
 	];
 
-    var sentiment = "";
-    if(percentage < -80) {
-        sentiment = sentimentLevels[0]
-    } else if (percentage < -60) {
-        sentiment = sentimentLevels[1]
-    } else if (percentage < -40) {
-        sentiment = sentimentLevels[2]
-    } else if (percentage < -20) {
-        sentiment = sentimentLevels[3]
-    }  else if (percentage < -1) {
-        sentiment = sentimentLevels[4]
-    } else if (-1 <= percentage && percentage <= 1) {
-        sentiment = sentimentLevels[5]
-    } else if (percentage < 20) {
-        sentiment = sentimentLevels[6]
-    } else if (percentage < 40) {
-        sentiment = sentimentLevels[7]
-    } else if (percentage < 60) {
-        sentiment = sentimentLevels[8]
-    } else if (percentage < 80) {
-        sentiment = sentimentLevels[9]
-    } else if (percentage <= 100) {
-        sentiment = sentimentLevels[10]
-    }
+	var sentiment = "";
+	if (percentage < -80) {
+		sentiment = sentimentLevels[0];
+	} else if (percentage < -60) {
+		sentiment = sentimentLevels[1];
+	} else if (percentage < -40) {
+		sentiment = sentimentLevels[2];
+	} else if (percentage < -20) {
+		sentiment = sentimentLevels[3];
+	} else if (percentage < -1) {
+		sentiment = sentimentLevels[4];
+	} else if (-1 <= percentage && percentage <= 1) {
+		sentiment = sentimentLevels[5];
+	} else if (percentage < 20) {
+		sentiment = sentimentLevels[6];
+	} else if (percentage < 40) {
+		sentiment = sentimentLevels[7];
+	} else if (percentage < 60) {
+		sentiment = sentimentLevels[8];
+	} else if (percentage < 80) {
+		sentiment = sentimentLevels[9];
+	} else if (percentage <= 100) {
+		sentiment = sentimentLevels[10];
+	}
 
-    var r = document.querySelector(":root");
-    var color = "";
-    var topRightBorder = "";
-    if(percentage >= 0) {
-        color = "#EF3D3D";
-    } else {
-        color = "#58A3F4";
-    }
-    if(Math.abs(percentage) >= 98.5) {
-        topRightBorder = "10px";
-    } else {
-        topRightBorder = "0px";
-    }
-    r.style.setProperty("--sentiment-top-right-border2", `${topRightBorder}`);
-    if((-2 <= percentage && percentage < 0) || (0 < percentage && percentage <= 2)) {
-	    r.style.setProperty("--sentiment-width2", `2%`);
-    } else {
-        r.style.setProperty("--sentiment-width2", `${Math.abs(percentage)}%`);
-    }
-    r.style.setProperty("--sentiment-color2", `${color}`);
-    
-    return(
-       <div className='sentimentContainer2'>
-            <span className='sentimentText2'>{`${sentiment} (${Math.abs(percentage)}%)`}</span>
-            <div className='sentimentFiller2' />
-       </div>
-    );
+	var r = document.querySelector(":root");
+	var color = "";
+	var topRightBorder = "";
+	if (percentage >= 0) {
+		color = "#EF3D3D";
+	} else {
+		color = "#58A3F4";
+	}
+	if (Math.abs(percentage) >= 98.5) {
+		topRightBorder = "10px";
+	} else {
+		topRightBorder = "0px";
+	}
+	r.style.setProperty("--sentiment-top-right-border2", `${topRightBorder}`);
+	if (
+		(-2 <= percentage && percentage < 0) ||
+		(0 < percentage && percentage <= 2)
+	) {
+		r.style.setProperty("--sentiment-width2", `2%`);
+	} else {
+		r.style.setProperty("--sentiment-width2", `${Math.abs(percentage)}%`);
+	}
+	r.style.setProperty("--sentiment-color2", `${color}`);
+
+	return (
+		<div className='sentimentContainer2'>
+			<span className='sentimentText2'>{`${sentiment} (${Math.abs(
+				percentage
+			)}%)`}</span>
+			<div className='sentimentFiller2' />
+		</div>
+	);
 }
 
 function ArticlePane1({ percent }) {
-    return(
-        <div className='articlePane'>
-            <ArticleSentimentBar1 percent={percent} />
-        </div>
-    );
+	return (
+		<div className='articlePane'>
+			<ArticleSentimentBar1 percent={percent} />
+		</div>
+	);
 }
 
 function ArticlePane2({ percent }) {
-    return(
-        <div className='articlePane'>
-            <ArticleSentimentBar2 percent={percent}/>
-        </div>
-    );
+	return (
+		<div className='articlePane'>
+			<ArticleSentimentBar2 percent={percent} />
+		</div>
+	);
+}
+
+function LegendPair({ color, value }) {
+	return (
+		<div>
+			<div id='swatch'></div>
+			<script>
+				const swatch = document.getElementById('swatch');
+				swatch.style.backgroundColor({color});
+			</script>
+			<div>
+				<p>{value}</p>
+			</div>
+		</div>
+	);
+}
+
+function Legend() {
+	return (
+		<div>
+			<LegendPair color='#FFDA57' value='statements' />
+		</div>
+	);
 }
 
 function Compare() {
@@ -298,26 +338,31 @@ function Compare() {
 			<div className='upload'>
 				<ul>
 					<li>
-						<URLBox1 />
+						<div>
+							<URLBox1 />
+						</div>
 					</li>
 					<li>
 						<FileIcon1 />
 					</li>
 				</ul>
-				<ul>
+				<ul className='upload2'>
 					<li>
-						<URLBox2 />
+						<div>
+							<URLBox2 />
+						</div>
 					</li>
 					<li>
 						<FileIcon2 />
 					</li>
 				</ul>
 			</div>
-			<ContrastBar percent={0.1} />
-            <div className = 'articlePaneBox'>
-                <ArticlePane1 percent={-1.2}/>
-                <ArticlePane2 percent={-0.1}/>
-            </div>
+			<ContrastBar percent={0.5} />
+			<div className='articlePaneBox'>
+				<ArticlePane1 percent={-1.2} />
+				<ArticlePane2 percent={-0.1} />
+			</div>
+			<Legend />
 		</div>
 	);
 }
