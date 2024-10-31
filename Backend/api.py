@@ -13,3 +13,7 @@ app = Flask(__name__)
 @app.route("/<url>") 
 def get_article_content(url):
     return web_scraper.scrapeURL(url)
+
+# run Flask application (server)
+if __name__ == "__api__":
+    app.run(debug=True)
