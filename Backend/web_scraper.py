@@ -18,7 +18,8 @@ def scrapeURL(my_url):
         # Uses soup instance to find all elements for headings and page content based on tags
         heading = soup.find('h1').get_text()
         content = soup.find_all('p')
-        str_content = [] 
+        
+        str_content = [] # Creates a list to store the page content as Strings
         error = None
         
         # Prints the article heading and content to the terminal
@@ -26,7 +27,7 @@ def scrapeURL(my_url):
         print(heading)
         print("====================CONTENT====================")
         for paragraph in content:
-            str_content.append(paragraph.get_text())
+            str_content.append(paragraph.get_text()) # Adds each paragraph of page content to the list
             print(paragraph.get_text())
         
         # Returns the article heading as a String and the contents as a list of Strings
@@ -50,14 +51,15 @@ def scrapeHTMLFile(my_html_file):
     # Uses soup instance to find all elements for headings and page content based on tags
     heading = soup.find('h1').get_text()
     content = soup.find_all('p')
-    str_content = []
+    
+    str_content = [] # Creates a list to store the page content as Strings
     
     # Prints the article heading and content to the terminal
     print("====================HEADING====================")
     print(heading.get_text())
     print("====================CONTENT====================")
     for paragraph in content:
-        str_content.append(paragraph.get_text())
+        str_content.append(paragraph.get_text()) # Adds each paragraph of page content to the list
         print(paragraph.get_text())
     
     # Returns the article heading as a String and the content as a list of Strings
