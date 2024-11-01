@@ -11,6 +11,11 @@
     --top-spacing: 1vw;
 }
 
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
 .upload {
     display: flex;
     margin-top: var(--top-spacing);
@@ -123,7 +128,7 @@
 .articlePane {
     z-index: 0;
     display: inline;
-    height: 23vw;
+    height: 27vw;
     width: 44.88vw;
     border-radius: 10px;
     margin-left: 3.125vw;
@@ -200,4 +205,66 @@
     background-color: var(--sentiment-color2);
     border-top-left-radius: inherit;
     border-top-right-radius: var(--sentiment-top-right-border2);
+}
+
+.legendBox {
+    z-index: 0;
+    width: 92.885vw;
+    height: 25px;
+    margin-top: var(--top-spacing);
+    margin-left: 3.125vw;
+    border-radius: 10px;
+    background-color: #393E48;
+    box-shadow: var(--shadow);
+}
+
+.legendBox ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.legendPair {
+    display: flex;
+}
+
+.legendText {
+    font-size: 14px;
+    color: #F2E9E4;
+    margin-top: 5.5px;
+}
+
+.legendColor {
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    margin-right: 0.5vw;
+    margin-top: 3.5px;
+}
+
+.summaryBox {
+    width: 92.885vw;
+    height: 14vw;
+    margin-top: var(--top-spacing);
+    margin-bottom: var(--top-spacing);
+    margin-left: 3.125vw;
+    border-radius: 10px;
+    background-color: #393E48;
+    box-shadow: var(--shadow);
+    overflow: auto;
+}
+
+.summaryBox ul {
+    list-style: none;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    color: #F2E9E4;
+}
+
+.summaryHeading {
+    font-size: 16px;
+    font-weight: bold;
 }

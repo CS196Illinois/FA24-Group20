@@ -310,14 +310,14 @@ function ArticlePane2({ percent }) {
 }
 
 function LegendPair({ color, value }) {
+	console.log(color);
 	return (
-		<div>
-			<div id='swatch'></div>
-			<script>
-				const swatch = document.getElementById('swatch');
-				swatch.style.backgroundColor({color});
-			</script>
-			<div>
+		<div className='legendPair'>
+			<div
+				style={{ backgroundColor: color }}
+				className='legendColor'
+			></div>
+			<div className='legendText'>
 				<p>{value}</p>
 			</div>
 		</div>
@@ -326,8 +326,34 @@ function LegendPair({ color, value }) {
 
 function Legend() {
 	return (
-		<div>
-			<LegendPair color='#FFDA57' value='statements' />
+		<div className='legendBox'>
+			<ul>
+				<li></li>
+				<li>
+					<LegendPair color='#FFDA57' value='statements' />
+				</li>
+				<li>
+					<LegendPair color='#4BA4ED' value='statistics' />
+				</li>
+				<li>
+					<LegendPair color='#EC7ACE' value='quotes' />
+				</li>
+				<li>
+					<LegendPair color='#26EBA4' value='provocative language' />
+				</li>
+				<li></li>
+			</ul>
+		</div>
+	);
+}
+
+function Summary({ content }) {
+	return (
+		<div className='summaryBox' id='scroll-text'>
+			<ul>
+				<li className='summaryHeading'>Summary:</li>
+				<li className='summaryContent'>{content}</li>
+			</ul>
 		</div>
 	);
 }
@@ -363,6 +389,17 @@ function Compare() {
 				<ArticlePane2 percent={-0.1} />
 			</div>
 			<Legend />
+			<Summary
+				content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet, elit quis sodales varius, nunc velit laoreet erat, ac maximus tellus tellus nec arcu. Fusce vitae pharetra nibh, non accumsan nunc. Phasellus at dictum justo. Vivamus ullamcorper dolor non lobortis tempor. Phasellus egestas eleifend aliquet. Nunc vitae ex ac nunc facilisis imperdiet. Vestibulum erat ligula, viverra ut dui vitae, aliquet placerat tellus. Fusce interdum semper turpis quis lobortis. Phasellus facilisis, nulla ut faucibus fringilla, augue arcu porta erat, a auctor lectus mi et ante. Sed ultrices lectus ut mauris suscipit aliquet. Sed ut interdum nisl. Fusce et erat sit amet nulla tincidunt convallis. Nulla aliquet urna in libero porta porttitor.
+
+Aliquam at odio ac erat vehicula lobortis. Nullam metus urna, sodales sit amet pellentesque et, elementum vitae velit. Pellentesque congue sapien in ultrices sagittis. Vivamus vel venenatis dui. In eu tempus risus. Aenean scelerisque, erat id gravida porta, dui libero vehicula ipsum, non aliquet orci dolor semper libero. Integer eu leo sit amet orci consectetur mollis.
+
+Cras congue congue nisl at fermentum. Nulla consectetur, ante ut egestas rutrum, quam quam pellentesque magna, ultrices pretium libero diam tincidunt dui. In commodo, sem et placerat ultricies, erat leo rutrum mauris, sed malesuada libero mauris eget nulla. Etiam ullamcorper augue eget lectus consectetur vehicula. Phasellus arcu nibh, dignissim a nibh at, fermentum volutpat felis. Pellentesque posuere mauris a massa luctus sollicitudin. Aliquam fermentum mauris vitae diam tempus vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium suscipit venenatis. Quisque sagittis accumsan lobortis. Nam sed orci risus.
+
+Cras tempor enim eu ex posuere, vitae finibus urna iaculis. Ut a fringilla lectus, at congue mauris. Etiam vel ipsum sed felis auctor dignissim ut quis felis. Pellentesque et risus tempus odio iaculis facilisis. Donec vulputate risus in consequat porta. Nullam faucibus maximus libero luctus interdum. Mauris mollis accumsan diam, quis fringilla eros feugiat id. Aenean sed dignissim lectus.
+
+Sed non ullamcorper augue. Aliquam erat volutpat. Nullam consequat mattis turpis. Sed a ex id mi rutrum tristique. Morbi eu rutrum sem, a imperdiet odio. Nam non eros sit amet sapien mollis mollis vel eleifend neque. Sed suscipit in felis non interdum. Proin luctus est ut justo gravida eleifend. Nam sollicitudin dictum mauris, sit amet dictum erat dictum ut. Ut semper mauris in massa semper elementum. Donec maximus, ipsum eget rhoncus posuere, urna turpis fermentum turpis, et sagittis turpis tellus quis mi. Sed ac feugiat sapien. Etiam imperdiet nec urna a blandit. Ut fringilla enim odio, eu pretium felis posuere et.'
+			/>
 		</div>
 	);
 }
