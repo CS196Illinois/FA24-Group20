@@ -19,8 +19,8 @@ def scrapeURL(my_url):
         heading = soup.find('h1').get_text()
         content = soup.find_all('p')
         
-        str_content_list = [] # Creates a list to store the page content as Strings
-        str_content = ""
+        str_content_list = [] # To store the page content as a list of Strings
+        str_content = "" # To store the page content as a single String
         error = None
         
         # Prints the article heading and content to the terminal
@@ -29,7 +29,7 @@ def scrapeURL(my_url):
         print("====================CONTENT====================")
         for paragraph in content:
             str_content_list.append(paragraph.get_text()) # Adds each paragraph of page content to the list
-            str_content += " " + paragraph.get_text()
+            str_content += paragraph.get_text() + " " # Concatenates each paragraph of page content to the String variable
         print(str_content)
         
         # Returns the article heading as a String and the contents as a String
@@ -40,9 +40,6 @@ def scrapeURL(my_url):
         print("Failed to get page contents.")
 
     return None, None, error
-
-# url1 = "https://apnews.com/article/trump-california-coachella-nevada-arizona-newsom-4557c2f98ffc179178fe5b6ec5bcf8aa"
-# print(scrapeURL(url1))
 
 # Takes an HTML file and returns the heading and contents of the article
 def scrapeHTMLFile(my_html_file):
@@ -57,17 +54,21 @@ def scrapeHTMLFile(my_html_file):
     heading = soup.find('h1').get_text()
     content = soup.find_all('p')
     
-    str_content_list = [] # Creates a list to store the page content as Strings
-    str_content = ""
+    str_content_list = [] # To store the page content as a list of Strings
+    str_content = "" # To store the page content as a single String
     
     # Prints the article heading and content to the terminal
     print("====================HEADING====================")
-    print(heading.get_text())
+    print(heading)
     print("====================CONTENT====================")
     for paragraph in content:
         str_content_list.append(paragraph.get_text()) # Adds each paragraph of page content to the list
-        str_content += " " + paragraph.get_text()
+        str_content += paragraph.get_text() + " " # Concatenates each paragraph of page content to the String variable
     print(str_content)
     
     # Returns the article heading as a String and the content as a String
     return heading, str_content
+
+# Tests: 
+# url1 = "https://apnews.com/article/trump-california-coachella-nevada-arizona-newsom-4557c2f98ffc179178fe5b6ec5bcf8aa"
+# scrapeURL(url1)
