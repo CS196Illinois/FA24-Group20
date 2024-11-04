@@ -1,4 +1,5 @@
 import web_scraper
+import GeminiAPI_Backend
 from flask import Flask, request, jsonify
 
 # Creates Flask application
@@ -11,13 +12,13 @@ def get_article(url):
     heading, content, error = web_scraper.scrapeURL(url)
     data = {
         "Heading": heading,
-        "Content": content,
+        "Summary": GeminiAPI_Backend.call_gemini_api_for_summary(content),
         "Error": error
     }
 
     # Returns the final scraped content
     return jsonify(data)
 
-# Runs Flask application (server)
+# Runs Flask application 
 if __name__ == "__main__":
     app.run(debug=True)
