@@ -6,7 +6,7 @@ function Home() {
         <div>
             <img src='biasbuster.png' alt="Bias Buster Logo" className={classes.center}></img>
             <h1 className={classes.titleStyle}>Bias Buster</h1>
-            <h2 className={classes.comingSoonRegular}>Debunking Politics One Article at a Time</h2>
+            <h2 className={classes.catchPhrase}>Debunking Politics One Article at a Time</h2>
             <div className={classes.buttonBox}>
                 <a href="http://localhost:3000/Compare">
                     <button className={`${classes.button_1} ${classes.left_button}`}>Compare </button>

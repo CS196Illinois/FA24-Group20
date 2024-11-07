@@ -1,38 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Danfo&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+body {
+    background: #2e2e37;
+    background: linear-gradient(90deg, #1d1827, #2e2e37);
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+}
 
 .titleStyle {
     color: #F2E9E4;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    font-family: "Dosis", Helvetica, sans-serif;
     font-size: 150px;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
     display: block;
     padding-top: 20px;
-    padding-bottom: 0px;  
+    padding-bottom: 15px; 
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
 }
+
+.catchPhrase {
+    position: relative;
+    top: -15px;
+    letter-spacing: 4px;
+    color: #F2E9E4;
+    text-align: center;
+    font-family: "Dosis", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    padding-top: 10px;
+    animation: 3s anim-lineUpforCatchPhrase ease-out;
+    animation-iteration-count: 1;
+}  
 
 .aboutTitleStyle {
     color: #F2E9E4;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    font-family: "Dosis", Helvetica, sans-serif;
     background-color: #221f26;
     font-size: 120px;
     font-weight: 300;
     text-align: center;
     display:block;
     padding-top: 100px;
-    padding-bottom: 0px;  
+    padding-bottom: 0px;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;  
 }
 
 .ourMissionStyle {
     color: #F2E9E4;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    background-color: #2e2e37;
+    font-family: "Dosis", Helvetica, sans-serif;
     font-size: 90px;
     font-weight: 300;
     text-align: left;
     display:block;
     padding-top: 70px;
     padding-left: 50px;
-    padding-bottom: 0px;  
+    padding-bottom: 0px; 
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1; 
 }
 
 
@@ -42,36 +72,29 @@
     color: #F2E9E4;
     padding-top: 20px;
     padding-bottom: 100px;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    font-family: "Dosis", Helvetica, sans-serif;
     letter-spacing: 4px;
     font-weight: 100;
     font-size: 25px;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
 }
 
 .textContent2 {
     text-align: left;
     color: #F2E9E4;
+    background-color: #2e2e37;
     padding-top: 20px;
     padding-bottom: 70px;
     padding-left: 50px;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    font-family: "Dosis", Helvetica, sans-serif;
     letter-spacing: 4px;
     line-height: 40px;
     font-weight: 200;
     font-size: 25px;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
 }
-
-.comingSoonRegular {
-    position: relative;
-    top: -15px;
-    letter-spacing: 4px;
-    color: #F2E9E4;
-    text-align: center;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
-    font-weight: 200;
-    font-size: 22px;
-    padding-top: -10px;
-}  
 
 .button_1 {
     margin: auto;
@@ -79,18 +102,22 @@
     color: #F2E9E4;
     text-decoration: none;
     display: inline-block;
-    font-family: "Nunito Sans", Helvetica, sans-serif;
+    font-family: "Dosis", Helvetica, sans-serif;
     font-size: 18px;
     transition-duration: 0.4s;
     cursor: pointer;
-    background-color: #2e2e37;
+    background-color: #292932;
     border: 2px solid #F2E9E4;
+    box-shadow: 5px 5px 10px #1d1827;
+    border-radius: 15px;
     padding: 1vw;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
 }
 
 .button_1:hover {
     background-color: #F2E9E4;
-    color: #2e2e37;
+    color: #292932;
 }
 
 .buttonBox {
@@ -100,7 +127,7 @@
     width: auto;
     height: auto;
     text-align: center;
-    margin-top: 0.9%;
+    margin-top: 1.9%;
 }   
 
 .left_button {
@@ -117,8 +144,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 4.5%;
+    margin-top: 6.0%;
     width: 9%;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
 }
 
 ::-webkit-scrollbar {
@@ -139,3 +168,41 @@
     background: #b75b56;
     border-radius: 50px;
 }
+
+@keyframes anim-lineUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+      filter: blur(2px);
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+}
+
+@keyframes anim-lineUpforCatchPhrase {
+    0% {
+      opacity: 0;
+      transform: translateY(90%);
+      filter: blur(2px);
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
