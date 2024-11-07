@@ -1,28 +1,18 @@
-import google.generativeai as genai
-import os
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch.nn.functional as F
+from transformers import pipeline
 
-genai.configure(api_key=os.environ["API_KEY"])
-model = genai.GenerativeModel("gemini-1.5-flash")
+absa_tokenizer = AutoTokenizer.from_pretrained("yangheng/deberta-v3-base-absa-v1.1")
+absa_model = AutoModelForSequenceClassification \
+  .from_pretrained("yangheng/deberta-v3-base-absa-v1.1")
 
-def provocative_language(text_to_summarize):
+sentiment_model_path = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+sentiment_model = pipeline("sentiment-analysis", model=sentiment_model_path,
+                          tokenizer=sentiment_model_path)
 
-    prompt = f"Provide the 10 most strongly worded phrases or sentence in the following text and only include them as a list separated by a new line:\n\n{text_to_summarize}"
 
-    response = model.generate_content(prompt)
-    provocative_text = response._result.candidates[0].content.parts[0].text
-
-    return provocative_text
-
-def summarize(text_to_summarize):
-
-    prompt = f"Summarize the following article:\n\n{text_to_summarize}"
-
-    response = model.generate_content(prompt)
-    summary_text = response._result.candidates[0].content.parts[0].text
-
-    return summary_text
-
-# Example article to summarize
+# sentence = "We had a great experience at the restaurant, food was delicious, but " \
+  # "the service was kinda bad"
 article = """
 ====================HEADING====================
 'Dead heat': Trump pulls even with Harris in NBC News poll
@@ -84,7 +74,31 @@ And 31% of voters believe the nation is headed in the right direction, while 64%
 The NBC News poll of 1,000 registered voters, 898 of whom were reached by cellphone, was conducted Oct. 4-8. It has an overall margin of error of plus or minus 3.1 percentage points.
 Mark Murray is a senior political editor at NBC News.
 © 2024 NBC UNIVERSAL
-"""
+"""  
+print(f"Sentence: {article}")
+print()
 
-print(summarize(article))
-print(provocative_language(article))
+# aspect = "food"
+aspect = "Trump"
+inputs = absa_tokenizer(f"[CLS] {article} [SEP] {aspect} [SEP]", return_tensors="pt")
+outputs = absa_model(**inputs)
+probs = F.softmax(outputs.logits, dim=1)
+probs = probs.detach().numpy()[0]
+print(f"Sentiment of aspect '{aspect}' is:")
+for prob, label in zip(probs, ["negative", "neutral", "positive"]):
+  print(f"Label {label}: {prob}")
+print()
+
+# aspect = "service"
+aspect = "Harris"
+inputs = absa_tokenizer(f"[CLS] {article} [SEP] {aspect} [SEP]", return_tensors="pt")
+outputs = absa_model(**inputs)
+probs = F.softmax(outputs.logits, dim=1)
+probs = probs.detach().numpy()[0]
+print(f"Sentiment of aspect '{aspect}' is:")
+for prob, label in zip(probs, ["negative", "neutral", "positive"]):
+  print(f"Label {label}: {prob}")
+print()
+
+sentiment = sentiment_model([article])[0]
+print(f"Overall sentiment: {sentiment['label']} with score {sentiment['score']}")
