@@ -1,12 +1,12 @@
 import web_scraper
-import GeminiAPI # NEED TO UPDATE THIS
+import GeminiAPI
 from flask import Flask, jsonify
 
 # Creates Flask application
 app = Flask(__name__)
 
 # Creates API route
-@app.route("/api/get_article/<path:url>") 
+@app.route("/api/get_article/<path:html_file>") 
 def get_article(html_file):
     # Scrapes web by calling scrapeURL function
     heading, content, error = web_scraper.scrapeHTMLFile(html_file)
@@ -21,7 +21,7 @@ def get_article(html_file):
 
 # Runs Flask application 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0') # NEED TO UPDATE THIS
+    app.run(debug=True) # MAY NEED TO UPDATE THIS
 
 """
 EXAMPLE
