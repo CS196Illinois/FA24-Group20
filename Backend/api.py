@@ -1,5 +1,5 @@
 import web_scraper
-import GeminiAPI_Backend # NEED TO UPDATE THIS
+import GeminiAPI # NEED TO UPDATE THIS
 from flask import Flask, jsonify
 
 # Creates Flask application
@@ -7,12 +7,12 @@ app = Flask(__name__)
 
 # Creates API route
 @app.route("/api/get_article/<path:url>") 
-def get_article(url):
+def get_article(html_file):
     # Scrapes web by calling scrapeURL function
-    heading, content, error = web_scraper.scrapeURL(url)
+    heading, content, error = web_scraper.scrapeHTMLFile(html_file)
     data = {
         "Heading": heading,
-        "Summary": GeminiAPI_Backend.call_gemini_api_for_summary(content), # NEED TO UPDATE THIS
+        "Summary": GeminiAPI.call_gemini_api_for_summary(content), # NEED TO UPDATE THIS
         "Error": error
     }
 
