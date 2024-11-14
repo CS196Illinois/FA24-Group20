@@ -360,10 +360,10 @@ function Summary({ content }) {
 }
 
 function Compare() {
-	/* const [contrastPercent, setContrastPercent] = useState(0.0);
+	const [contrastPercent, setContrastPercent] = useState(0.0);
 	const [article1Percent, setArticle1Percent] = useState(0.0);
 	const [article2Percent, setArticle2Percent] = useState(0.0);
-	const [summaryText, setSummaryText] = useState(""); */
+	const [summaryText, setSummaryText] = useState("");
 	return (
 		<FileUploadProvider>
 			<div className='pageContent'>
