@@ -65,6 +65,61 @@ body {
     animation-iteration-count: 1; 
 }
 
+.meetCreatorsTitle {
+    color: #F2E9E4;
+    background-color: #221f26;
+    font-family: "Dosis", Helvetica, sans-serif;
+    font-size: 90px;
+    font-weight: 300;
+    text-align: center;
+    display:block;
+    padding-top: 70px;
+    padding-left: 50px;
+    padding-bottom: 70px; 
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1; 
+}
+
+.authorsRightSide {
+    color: #F2E9E4;
+    background-color: #2e2e37;
+    font-family: "Dosis", Helvetica, sans-serif;
+    font-size: 90px;
+    font-weight: 300;
+    text-align: right;
+    display: block;
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-bottom: 30px; 
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1; 
+}
+
+.authorsLeftSide {
+    color: #F2E9E4;
+    background-color: #2e2e37;
+    font-family: "Dosis", Helvetica, sans-serif;
+    font-size: 90px;
+    font-weight: 300;
+    text-align: left;
+    display: block;
+    padding-top: 40px;
+    padding-left: 80px;
+    padding-bottom: 30px; 
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1; 
+}
+
+.reveal {
+    position: relative;
+    opacity: 1;
+    transition: 1s all ease;
+}
+
+.reveal.active {
+    opacity: 0;
+}
+
 
 .paragraphContent {
     text-align: center;
@@ -91,6 +146,38 @@ body {
     letter-spacing: 4px;
     line-height: 40px;
     font-weight: 200;
+    font-size: 25px;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
+}
+
+.textContent3R {
+    text-align: right;
+    color: #F2E9E4;
+    background-color: #2e2e37;
+    font-family: "Dosis", Helvetica, sans-serif;
+    letter-spacing: 4px;
+    line-height: 45px;
+    font-weight: 200;
+    padding-right: 80px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 25px;
+    animation: 3s anim-lineUp ease-out;
+    animation-iteration-count: 1;
+}
+
+.textContent3L {
+    text-align: left;
+    color: #F2E9E4;
+    background-color: #2e2e37;
+    font-family: "Dosis", Helvetica, sans-serif;
+    letter-spacing: 4px;
+    line-height: 45px;
+    font-weight: 200;
+    padding-left: 80px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     font-size: 25px;
     animation: 3s anim-lineUp ease-out;
     animation-iteration-count: 1;
@@ -148,6 +235,14 @@ body {
     width: 9%;
     animation: 3s anim-lineUp ease-out;
     animation-iteration-count: 1;
+}
+
+.img1 {
+    width: 600px;
+    height: 600px;
+    animation: 3s anim-lineUp ease-out;
+    float: left;
+    vertical-align: sub;
 }
 
 ::-webkit-scrollbar {
