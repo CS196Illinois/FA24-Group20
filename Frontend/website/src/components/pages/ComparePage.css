@@ -8,12 +8,19 @@
     --sentiment-top-right-border1: "";
     --sentiment-top-right-border2: "";
     --shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    --top-spacing: 1vw;
+    --top-spacing: 10px;
 }
 
 html, body {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
+}
+
+.pageContent {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .upload {
@@ -88,6 +95,34 @@ html, body {
     margin-top: 4.5px;
 }
 
+.aspectBox {
+    margin-bottom: var(--top-spacing);
+    width: 92.885vw;
+    margin-left: 3.125vw;
+    border-style: none;
+    height: 25px;
+    max-width: 99%;
+    margin-right: 1vw;
+    background-color: #393E48;
+    font-size: 30;
+    color: #D3CFCE;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.aspectBox::placeholder {
+    color: #a6a4a3;
+    padding-left: 10px; 
+    padding-right: 10px;
+    font-size: 30;
+    font-style: italic;
+    text-align: center;
+}
+
 .contrastContainer {
     height: 25px;
     width: 93vw;
@@ -123,12 +158,13 @@ html, body {
 
 .articlePaneBox {
     display: flex;
+    min-height: 20vw;
+    flex: 0.7;
 }
 
 .articlePane {
     z-index: 0;
     display: inline;
-    height: 27vw;
     width: 44.88vw;
     border-radius: 10px;
     margin-left: 3.125vw;
@@ -245,7 +281,7 @@ html, body {
 
 .summaryBox {
     width: 92.885vw;
-    height: 14vw;
+    min-height: 10vw;
     margin-top: var(--top-spacing);
     margin-bottom: var(--top-spacing);
     margin-left: 3.125vw;
@@ -253,13 +289,14 @@ html, body {
     background-color: #393E48;
     box-shadow: var(--shadow);
     overflow: auto;
+    flex: 0.23;
 }
 
 .summaryBox ul {
     list-style: none;
     margin-left: 3%;
     margin-right: 3%;
-    padding-top: 8px;
+    padding-top: 12px;
     padding-bottom: 6px;
     color: #F2E9E4;
 }

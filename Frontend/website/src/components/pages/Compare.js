@@ -4,66 +4,9 @@
 
 import "./ComparePage.css";
 import React, { useState } from "react";
-
-function FileIcon1() {
-	const [selectedFile1, setSelectedFile] = useState(null);
-
-	const handleFileChange = (event) => {
-		setSelectedFile(event.target.files[0]);
-	};
-
-	return (
-		<div className='fileIcon'>
-			<label for='fileInput'>
-				<div className='fileIconSquare'>
-					<img
-						src={require("../../Icon.png")}
-						width='12px'
-						height='15px'
-						alt='file icon'
-					/>
-				</div>
-			</label>
-			<input
-				id='fileInput'
-				type='file'
-				accept='.html'
-				onChange={handleFileChange}
-			/>
-			{selectedFile1 && <p>Selected file: {selectedFile1.name}</p>}
-		</div>
-	);
-}
-
-function FileIcon2() {
-	const [selectedFile2, setSelectedFile] = useState(null);
-
-	const handleFileChange = (event) => {
-		setSelectedFile(event.target.files[0]);
-	};
-
-	return (
-		<div className='fileIcon'>
-			<label for='fileInput'>
-				<div className='fileIconSquare'>
-					<img
-						src={require("../../Icon.png")}
-						width='12px'
-						height='15px'
-						alt='file icon'
-					/>
-				</div>
-			</label>
-			<input
-				id='fileInput'
-				type='file'
-				accept='.html'
-				onChange={handleFileChange}
-			/>
-			{selectedFile2 && <p>Selected file: {selectedFile2.name}</p>}
-		</div>
-	);
-}
+import { FileUploadProvider } from "./components/FileUploadContext";
+import { useFileUpload } from "./components/FileUploadContext";
+import FileUpload from "./components/FileUpload";
 
 function URLBox1() {
 	const [text, setText] = useState("");
@@ -101,8 +44,68 @@ function URLBox2() {
 	);
 }
 
-function ContrastBar({ percent }) {
-	const percentage = percent;
+function UploadBox() {
+	return (
+		<div className='upload'>
+			<ul>
+				<li>
+					<div>
+						<URLBox1 />
+					</div>
+				</li>
+				<li>
+                    <FileUpload id="file1"/>
+				</li>
+			</ul>
+			<ul className='upload2'>
+				<li>
+					<div>
+						<URLBox2 />
+					</div>
+				</li>
+				<li>
+                    <FileUpload id="file2"/>
+				</li>
+			</ul>
+		</div>
+	);
+}
+
+function AspectBox() {
+	const [text, setText] = useState("");
+	const handleChange = (event) => {
+		setText(event.target.value);
+	};
+	return (
+		<div>
+			<input
+				className='aspectBox'
+				type='text'
+				value={text}
+				onChange={handleChange}
+				placeholder='Enter a topic to analyze i.e. "Harris" (leave blank for automatic analysis)'
+			/>
+		</div>
+	);
+}
+
+function CompareButton() {
+	const { isFormValid } = useFileUpload();
+
+    const handleSubmit = () => {
+
+    };
+
+	return (
+		<div>
+			<button disabled={!isFormValid} onClick={handleSubmit}>
+				Compare!
+			</button>
+		</div>
+	);
+}
+
+function ContrastBar({ percentage }) {
 	const contrastLevels = [
 		"Weak Contrast ",
 		"Moderately Weak Contrast ",
@@ -143,8 +146,7 @@ function ContrastBar({ percent }) {
 	);
 }
 
-function ArticleSentimentBar1({ percent }) {
-	const percentage = percent;
+function ArticleSentimentBar1({ percentage }) {
 	const sentimentLevels = [
 		"Strongly Left-Leaning ",
 		"Moderately Strongly Left-Leaning ",
@@ -218,8 +220,7 @@ function ArticleSentimentBar1({ percent }) {
 	);
 }
 
-function ArticleSentimentBar2({ percent }) {
-	const percentage = percent;
+function ArticleSentimentBar2({ percentage }) {
 	const sentimentLevels = [
 		"Strongly Left-Leaning ",
 		"Moderately Strongly Left-Leaning ",
@@ -293,18 +294,18 @@ function ArticleSentimentBar2({ percent }) {
 	);
 }
 
-function ArticlePane1({ percent }) {
+function ArticlePane1({ percentage }) {
 	return (
 		<div className='articlePane'>
-			<ArticleSentimentBar1 percent={percent} />
+			<ArticleSentimentBar1 percentage={percentage} />
 		</div>
 	);
 }
 
-function ArticlePane2({ percent }) {
+function ArticlePane2({ percentage }) {
 	return (
 		<div className='articlePane'>
-			<ArticleSentimentBar2 percent={percent} />
+			<ArticleSentimentBar2 percentage={percentage} />
 		</div>
 	);
 }
@@ -359,48 +360,31 @@ function Summary({ content }) {
 }
 
 function Compare() {
+	/* const [contrastPercent, setContrastPercent] = useState(0.0);
+	const [article1Percent, setArticle1Percent] = useState(0.0);
+	const [article2Percent, setArticle2Percent] = useState(0.0);
+	const [summaryText, setSummaryText] = useState(""); */
 	return (
-		<div>
-			<div className='upload'>
+		<FileUploadProvider>
+			<div className='pageContent'>
+				<UploadBox />
 				<ul>
 					<li>
-						<div>
-							<URLBox1 />
-						</div>
+						<AspectBox />
 					</li>
 					<li>
-						<FileIcon1 />
+						<CompareButton />
 					</li>
 				</ul>
-				<ul className='upload2'>
-					<li>
-						<div>
-							<URLBox2 />
-						</div>
-					</li>
-					<li>
-						<FileIcon2 />
-					</li>
-				</ul>
+				<ContrastBar percentage={contrastPercent} />
+				<div className='articlePaneBox'>
+					<ArticlePane1 percentage={article1Percent} />
+					<ArticlePane2 percentage={article2Percent} />
+				</div>
+				<Legend />
+				<Summary content={summaryText} />
 			</div>
-			<ContrastBar percent={0.5} />
-			<div className='articlePaneBox'>
-				<ArticlePane1 percent={-1.2} />
-				<ArticlePane2 percent={-0.1} />
-			</div>
-			<Legend />
-			<Summary
-				content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet, elit quis sodales varius, nunc velit laoreet erat, ac maximus tellus tellus nec arcu. Fusce vitae pharetra nibh, non accumsan nunc. Phasellus at dictum justo. Vivamus ullamcorper dolor non lobortis tempor. Phasellus egestas eleifend aliquet. Nunc vitae ex ac nunc facilisis imperdiet. Vestibulum erat ligula, viverra ut dui vitae, aliquet placerat tellus. Fusce interdum semper turpis quis lobortis. Phasellus facilisis, nulla ut faucibus fringilla, augue arcu porta erat, a auctor lectus mi et ante. Sed ultrices lectus ut mauris suscipit aliquet. Sed ut interdum nisl. Fusce et erat sit amet nulla tincidunt convallis. Nulla aliquet urna in libero porta porttitor.
-
-Aliquam at odio ac erat vehicula lobortis. Nullam metus urna, sodales sit amet pellentesque et, elementum vitae velit. Pellentesque congue sapien in ultrices sagittis. Vivamus vel venenatis dui. In eu tempus risus. Aenean scelerisque, erat id gravida porta, dui libero vehicula ipsum, non aliquet orci dolor semper libero. Integer eu leo sit amet orci consectetur mollis.
-
-Cras congue congue nisl at fermentum. Nulla consectetur, ante ut egestas rutrum, quam quam pellentesque magna, ultrices pretium libero diam tincidunt dui. In commodo, sem et placerat ultricies, erat leo rutrum mauris, sed malesuada libero mauris eget nulla. Etiam ullamcorper augue eget lectus consectetur vehicula. Phasellus arcu nibh, dignissim a nibh at, fermentum volutpat felis. Pellentesque posuere mauris a massa luctus sollicitudin. Aliquam fermentum mauris vitae diam tempus vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium suscipit venenatis. Quisque sagittis accumsan lobortis. Nam sed orci risus.
-
-Cras tempor enim eu ex posuere, vitae finibus urna iaculis. Ut a fringilla lectus, at congue mauris. Etiam vel ipsum sed felis auctor dignissim ut quis felis. Pellentesque et risus tempus odio iaculis facilisis. Donec vulputate risus in consequat porta. Nullam faucibus maximus libero luctus interdum. Mauris mollis accumsan diam, quis fringilla eros feugiat id. Aenean sed dignissim lectus.
-
-Sed non ullamcorper augue. Aliquam erat volutpat. Nullam consequat mattis turpis. Sed a ex id mi rutrum tristique. Morbi eu rutrum sem, a imperdiet odio. Nam non eros sit amet sapien mollis mollis vel eleifend neque. Sed suscipit in felis non interdum. Proin luctus est ut justo gravida eleifend. Nam sollicitudin dictum mauris, sit amet dictum erat dictum ut. Ut semper mauris in massa semper elementum. Donec maximus, ipsum eget rhoncus posuere, urna turpis fermentum turpis, et sagittis turpis tellus quis mi. Sed ac feugiat sapien. Etiam imperdiet nec urna a blandit. Ut fringilla enim odio, eu pretium felis posuere et.'
-			/>
-		</div>
+		</FileUploadProvider>
 	);
 }
 
