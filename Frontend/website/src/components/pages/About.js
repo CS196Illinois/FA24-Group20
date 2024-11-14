@@ -102,6 +102,32 @@ function About() {
                 machine learning to create new solutions in any<br></br>  
                 of the continuously emerging fields.<br></br> 
             </p>
+            <p className={classes.authorsLeftSide}>Ted</p>
+            <p className={classes.textContent3L}>
+                Hi, my name is Ted Roh, and I am a freshman studying<br></br> 
+                Information Science + Data Science. I began programming<br></br>
+                in ninth grade, motivated by a desire to customize<br></br> 
+                Minecraft through mod development in Java. This early<br></br> 
+                experience introduced me to data manipulation and<br></br> 
+                complex logic structures, laying the foundation for<br></br> 
+                my interest in data engineering and data science.<br></br> 
+                In the future. I want to be more involved in the<br></br> 
+                field of data engineering and data science.<br></br>
+            </p>
+            <p className={classes.authorsRightSide}>Lahari</p>
+            <p className={classes.textContent3R}>
+                Hi, my name is Lahari Anantha and I am a freshman<br></br> 
+                studying Information Science + Data Science. I<br></br> 
+                became interested in computer science after doing<br></br> 
+                VEX Robotics in middle school and becoming interested<br></br> 
+                in how tangible actions could be expressed in a<br></br> 
+                logical way. From there, I got involved in programs<br></br> 
+                like Kode with Klossy and realized that I was<br></br> 
+                interested in using computer science and data<br></br> 
+                analysis in order to extract insights. I want to be<br></br>
+                more involved in data engineering and ML/AI in the<br></br> 
+                future.<br></br>
+            </p>
             
         </div>
     );
