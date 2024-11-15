@@ -31,7 +31,7 @@ function ContrastBar() {
 		rightBorder = "0px";
 	}
 	r.style.setProperty("--contrast-border", `${rightBorder}`);
-	if (contrastPercent < 2) {
+	if (0 < contrastPercent && contrastPercent < 2) {
 		r.style.setProperty("--contrast-width", `2%`);
 	} else {
 		r.style.setProperty("--contrast-width", `${contrastPercent}%`);

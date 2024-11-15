@@ -125,6 +125,8 @@ html, body {
 }
 
 .aspectBox {
+    padding-left: 12.7vw; 
+    padding-right: 0vw;
     width: 80vw;
     margin-left: 3.125vw;
     border-style: none;
@@ -134,7 +136,7 @@ html, body {
     background-color: #393E48;
     font-size: 30;
     color: #D3CFCE;
-    text-align: match-parent;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -144,8 +146,6 @@ html, body {
 
 .aspectBox::placeholder {
     color: #a6a4a3;
-    padding-left: 13vw; 
-    padding-right: 2vw;
     font-size: 30;
     font-style: italic;
     text-align: center;
@@ -281,7 +281,7 @@ html, body {
     top: 0%;
     height: 100%;
     width: var(--sentiment-width1);
-    background-color: #8e9095;
+    background-color: #6788c7;
     border-top-left-radius: inherit;
     border-top-right-radius: var(--sentiment-top-right-border1);
 }
@@ -292,7 +292,7 @@ html, body {
     top: 0%;
     height: 100%;
     width: var(--sentiment-width2);
-    background-color:  #8e9095;
+    background-color:  #6788c7;
     border-top-left-radius: inherit;
     border-top-right-radius: var(--sentiment-top-right-border2);
 }
@@ -360,10 +360,14 @@ html, body {
     font-weight: bold;
 }
 
+.summaryContent {
+    margin-top: 4px;
+}
+
 .horizontalLine {
     margin-top: 15px;
     width: 92.4vw;
     margin-left: 3.3vw;
     border: 0;
-    border-top: 2px solid #626367;
+    border-top: 1px solid #626367;
 }

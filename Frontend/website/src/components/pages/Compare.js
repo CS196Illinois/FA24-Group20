@@ -3,7 +3,7 @@
  */
 
 import "./ComparePage.css";
-import React, { useState } from "react";
+import React from "react";
 import {
 	CompareContextProvider,
 	useCompareContext,
@@ -16,6 +16,9 @@ import {
 	ArticleSentimentBar2,
 } from "./compare_components/ArticleSentimentBar";
 import Legend from "./compare_components/Legend";
+import Summary from "./compare_components/Summary";
+import CompareButton from "./compare_components/CompareButton";
+import AspectBox from "./compare_components/AspectBox";
 
 function UploadBox() {
 	const { file1Label, file2Label } = useCompareContext();
@@ -46,65 +49,7 @@ function UploadBox() {
 	);
 }
 
-function AspectBox() {
-	const { setAspect } = useCompareContext();
-	const [text, setText] = useState("");
-	const handleChange = (event) => {
-		setText(event.target.value);
-	};
-	const handleKeyDown = (event) => {
-		if (event.key === "Enter") {
-			setAspect(text);
-			setText("");
-		}
-	};
 
-	return (
-		<div>
-			<input
-				className='aspectBox'
-				type='text'
-				value={text}
-				onChange={handleChange}
-				onKeyDown={handleKeyDown}
-				placeholder='Enter a topic (i.e. "Harris") to analyze here, or leave blank for automatic selection'
-			/>
-		</div>
-	);
-}
-
-function CompareButton() {
-	const {
-		isFormValid,
-		webscrapeFiles,
-		calculateContrast,
-		calculateSentiment,
-		setResetFileInput,
-		reset,
-	} = useCompareContext();
-
-	const handleSubmit = () => {
-		webscrapeFiles();
-		calculateContrast();
-		calculateSentiment();
-		setResetFileInput(true);
-		reset();
-	};
-
-	return (
-		<div>
-			<button
-				className={`compareButton ${
-					!isFormValid ? "disabled" : "enabled"
-				}`}
-				disabled={!isFormValid}
-				onClick={handleSubmit}
-			>
-				Compare!
-			</button>
-		</div>
-	);
-}
 
 function ArticlePane1() {
 	return (
@@ -118,17 +63,6 @@ function ArticlePane2() {
 	return (
 		<div className='articlePane'>
 			<ArticleSentimentBar2 />
-		</div>
-	);
-}
-
-function Summary({ content }) {
-	return (
-		<div className='summaryBox' id='scroll-text'>
-			<ul>
-				<li className='summaryHeading'>Summary:</li>
-				<li className='summaryContent'>{content}</li>
-			</ul>
 		</div>
 	);
 }
