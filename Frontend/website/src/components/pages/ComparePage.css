@@ -3,12 +3,12 @@
     --contrast-border: "0px";
     --sentiment-width1: 0%;
     --sentiment-width2: 0%;
-    --sentiment-color1: #EF3D3D;
-    --sentiment-color2: #EF3D3D;
     --sentiment-top-right-border1: "";
     --sentiment-top-right-border2: "";
     --shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     --top-spacing: 10px;
+    --URLBox-placeholder-color1: #A6A4A3;
+    --URLBox-placeholder-color2: #A6A4A3;
 }
 
 html, body {
@@ -18,14 +18,14 @@ html, body {
 }
 
 .pageContent {
-    min-height: 100vh;
+    min-height: 94.75vh;
     display: flex;
     flex-direction: column;
 }
 
 .upload {
     display: flex;
-    margin-top: var(--top-spacing);
+    margin-top: 15px;
     margin-bottom: var(--top-spacing);
     width: 92.885vw;
     margin-left: 3.125vw;
@@ -39,17 +39,17 @@ html, body {
 }
 
 .upload2 {
-    margin-left: 3.1vw
+    margin-left: 2.45vw
 }
 
 .upload ul li {
     min-width: 0;
 }
 
-.urlBox {
+.urlBox1 {
     border-style: none;
     height: 25px;
-    width:42vw;
+    width:42.5vw;
     max-width: 99%;
     margin-right: 1vw;
     background-color: #393E48;
@@ -63,12 +63,36 @@ html, body {
     box-shadow: var(--shadow);
 }
 
-.urlBox::placeholder {
-    color: #a6a4a3;
+.urlBox1::placeholder {
+    color: var(--URLBox-placeholder-color1);
     padding-left: 10px; 
     padding-right: 10px;
     font-size: 30;
-    font-style: italic;
+    text-align: center;
+}
+
+.urlBox2 {
+    border-style: none;
+    height: 25px;
+    width:42.5vw;
+    max-width: 99%;
+    margin-right: 1vw;
+    background-color: #393E48;
+    font-size: 30;
+    color: #D3CFCE;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.urlBox2::placeholder {
+    color: var(--URLBox-placeholder-color2);
+    padding-left: 10px; 
+    padding-right: 10px;
+    font-size: 30;
     text-align: center;
 }
 
@@ -95,9 +119,13 @@ html, body {
     margin-top: 4.5px;
 }
 
+.aspectBoxAndCompareButton {
+    display: flex;
+    list-style: none;
+}
+
 .aspectBox {
-    margin-bottom: var(--top-spacing);
-    width: 92.885vw;
+    width: 80vw;
     margin-left: 3.125vw;
     border-style: none;
     height: 25px;
@@ -106,7 +134,7 @@ html, body {
     background-color: #393E48;
     font-size: 30;
     color: #D3CFCE;
-    text-align: center;
+    text-align: match-parent;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -116,16 +144,41 @@ html, body {
 
 .aspectBox::placeholder {
     color: #a6a4a3;
-    padding-left: 10px; 
-    padding-right: 10px;
+    padding-left: 13vw; 
+    padding-right: 2vw;
     font-size: 30;
     font-style: italic;
     text-align: center;
 }
 
-.contrastContainer {
+.compareButton {
+    width: 11.5vw;
+    background-color: #6788c7;
+    color: #F2E9E4;
     height: 25px;
-    width: 93vw;
+    padding: 2.5px;
+    border: none;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: var(--shadow);
+}
+
+.compareButton.enabled:hover {
+    background-color: #576d98;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.compareButton.disabled {
+    opacity: 0.5;
+}
+
+.contrastContainer {
+    margin-top: 15px;
+    height: 33px;
+    width: 92.8vw;
     position: relative;
     background-color: #393E48;
     border-radius: 50px;
@@ -137,7 +190,7 @@ html, body {
 .contrastText {
     z-index: 999;
     position:relative;
-    top: 14%;
+    top: 23%;
     transform: translateY(-50%);
     color: #F2E9E4;
     font-weight: bold;
@@ -159,15 +212,16 @@ html, body {
 .articlePaneBox {
     display: flex;
     min-height: 20vw;
-    flex: 0.7;
+    margin-left: 3.125vw;
+    flex: .8;
 }
 
 .articlePane {
     z-index: 0;
     display: inline;
-    width: 44.88vw;
+    width: 45.1451vw;
     border-radius: 10px;
-    margin-left: 3.125vw;
+    margin-right: 2.5vw;
     margin-top: var(--top-spacing);
     background-color: #393E48;
     box-shadow: var(--shadow)
@@ -177,7 +231,7 @@ html, body {
     z-index: 1;
     position: relative;
     height: 20px;
-    width: 44.88vw;
+    width: 45.1451vw;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     background-color: #F2E9E4;
@@ -191,7 +245,7 @@ html, body {
     z-index: 1;
     position: relative;
     height: 20px;
-    width: 44.88vw;
+    width: 45.1451vw;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     background-color: #F2E9E4;
@@ -227,7 +281,7 @@ html, body {
     top: 0%;
     height: 100%;
     width: var(--sentiment-width1);
-    background-color: var(--sentiment-color1);
+    background-color: #8e9095;
     border-top-left-radius: inherit;
     border-top-right-radius: var(--sentiment-top-right-border1);
 }
@@ -238,7 +292,7 @@ html, body {
     top: 0%;
     height: 100%;
     width: var(--sentiment-width2);
-    background-color: var(--sentiment-color2);
+    background-color:  #8e9095;
     border-top-left-radius: inherit;
     border-top-right-radius: var(--sentiment-top-right-border2);
 }
@@ -267,7 +321,7 @@ html, body {
 .legendText {
     font-size: 14px;
     color: #F2E9E4;
-    margin-top: 5.5px;
+    margin-top: 4px;
 }
 
 .legendColor {
@@ -282,14 +336,14 @@ html, body {
 .summaryBox {
     width: 92.885vw;
     min-height: 10vw;
-    margin-top: var(--top-spacing);
+    margin-top: 15px;
     margin-bottom: var(--top-spacing);
     margin-left: 3.125vw;
     border-radius: 10px;
     background-color: #393E48;
     box-shadow: var(--shadow);
     overflow: auto;
-    flex: 0.23;
+    flex: .2;
 }
 
 .summaryBox ul {
@@ -304,4 +358,12 @@ html, body {
 .summaryHeading {
     font-size: 16px;
     font-weight: bold;
+}
+
+.horizontalLine {
+    margin-top: 15px;
+    width: 92.4vw;
+    margin-left: 3.3vw;
+    border: 0;
+    border-top: 2px solid #626367;
 }
