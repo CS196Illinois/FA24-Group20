@@ -1,158 +1,162 @@
+/**
+ * @author William Lei &lt;wllei2@illinois.edu>
+ */
+
 import "./ComparePage.css";
 import React, { useState } from "react";
+import {
+	CompareContextProvider,
+	useCompareContext,
+} from "./compare_components/CompareContext";
+import FileUpload from "./compare_components/FileUpload";
+import URLBox from "./compare_components/URLBox";
+import ContrastBar from "./compare_components/ContrastBar";
+import {
+	ArticleSentimentBar1,
+	ArticleSentimentBar2,
+} from "./compare_components/ArticleSentimentBar";
+import Legend from "./compare_components/Legend";
 
-function FileIcon1() {
-	const [selectedFile1, setSelectedFile] = useState(null);
-
-	const handleFileChange = (event) => {
-		setSelectedFile(event.target.files[0]);
-	};
+function UploadBox() {
+	const { file1Label, file2Label } = useCompareContext();
 
 	return (
-		<div className='fileIcon'>
-			<label for='fileInput'>
-				<div className='fileIconSquare'>
-					<img
-						src={require("../../Icon.png")}
-						width='12px'
-						height='15px'
-						alt='file icon'
-					/>
-				</div>
-			</label>
-			<input
-				id='fileInput'
-				type='file'
-				accept='.html'
-				onChange={handleFileChange}
-			/>
-			{selectedFile1 && <p>Selected file: {selectedFile1.name}</p>}
+		<div className='upload'>
+			<ul>
+				<li>
+					<div>
+						<URLBox id='urlBox1' placeholder={file1Label} />
+					</div>
+				</li>
+				<li>
+					<FileUpload id='file1' />
+				</li>
+			</ul>
+			<ul className='upload2'>
+				<li>
+					<div>
+						<URLBox id='urlBox2' placeholder={file2Label} />
+					</div>
+				</li>
+				<li>
+					<FileUpload id='file2' />
+				</li>
+			</ul>
 		</div>
 	);
 }
 
-function FileIcon2() {
-	const [selectedFile2, setSelectedFile] = useState(null);
-
-	const handleFileChange = (event) => {
-		setSelectedFile(event.target.files[0]);
-	};
-
-	return (
-		<div className='fileIcon'>
-			<label for='fileInput'>
-				<div className='fileIconSquare'>
-					<img
-						src={require("../../Icon.png")}
-						width='12px'
-						height='15px'
-						alt='file icon'
-					/>
-				</div>
-			</label>
-			<input
-				id='fileInput'
-				type='file'
-				accept='.html'
-				onChange={handleFileChange}
-			/>
-			{selectedFile2 && <p>Selected file: {selectedFile2.name}</p>}
-		</div>
-	);
-}
-
-function URLBox1() {
+function AspectBox() {
+	const { setAspect } = useCompareContext();
 	const [text, setText] = useState("");
 	const handleChange = (event) => {
 		setText(event.target.value);
 	};
-	return (
-		<div>
-			<input
-				className='urlBox'
-				type='text'
-				value={text}
-				onChange={handleChange}
-				placeholder='Paste Link Here or Upload Article 1 (.html) &#8594;'
-			/>
-		</div>
-	);
-}
-
-function URLBox2() {
-	const [text, setText] = useState("");
-	const handleChange = (event) => {
-		setText(event.target.value);
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+			setAspect(text);
+			setText("");
+		}
 	};
+
 	return (
 		<div>
 			<input
-				className='urlBox'
+				className='aspectBox'
 				type='text'
 				value={text}
 				onChange={handleChange}
-				placeholder='Paste Link Here or Upload Article 2 (.html) &#8594;'
+				onKeyDown={handleKeyDown}
+				placeholder='Enter a topic (i.e. "Harris") to analyze here, or leave blank for automatic selection'
 			/>
 		</div>
 	);
 }
 
-function ContrastBar({ percent }) {
-	const percentage = percent;
-	const contrastLevels = [
-		"Weak Contrast ",
-		"Moderately Weak Contrast ",
-		"Moderate Contrast ",
-		"Moderately Strong Contrast ",
-		"Strong Contrast ",
-	];
-	var contrast = "";
-	if (percent < 20) {
-		contrast = contrastLevels[0];
-	} else if (percent < 40) {
-		contrast = contrastLevels[1];
-	} else if (percent < 60) {
-		contrast = contrastLevels[2];
-	} else if (percent < 80) {
-		contrast = contrastLevels[3];
-	} else if (percent <= 100) {
-		contrast = contrastLevels[4];
-	}
-	var r = document.querySelector(":root");
-	r.style.setProperty("--width", `${percentage}%`);
+function CompareButton() {
+	const {
+		isFormValid,
+		webscrapeFiles,
+		calculateContrast,
+		calculateSentiment,
+		setResetFileInput,
+		reset,
+	} = useCompareContext();
+
+	const handleSubmit = () => {
+		webscrapeFiles();
+		calculateContrast();
+		calculateSentiment();
+		setResetFileInput(true);
+		reset();
+	};
 
 	return (
-		<div className='contrastContainer'>
-			<span className='contrastText'>{`${contrast} (${percentage}%)`}</span>
-			<div className='contrastFiller' />
+		<div>
+			<button
+				className={`compareButton ${
+					!isFormValid ? "disabled" : "enabled"
+				}`}
+				disabled={!isFormValid}
+				onClick={handleSubmit}
+			>
+				Compare!
+			</button>
+		</div>
+	);
+}
+
+function ArticlePane1() {
+	return (
+		<div className='articlePane'>
+			<ArticleSentimentBar1 />
+		</div>
+	);
+}
+
+function ArticlePane2() {
+	return (
+		<div className='articlePane'>
+			<ArticleSentimentBar2 />
+		</div>
+	);
+}
+
+function Summary({ content }) {
+	return (
+		<div className='summaryBox' id='scroll-text'>
+			<ul>
+				<li className='summaryHeading'>Summary:</li>
+				<li className='summaryContent'>{content}</li>
+			</ul>
 		</div>
 	);
 }
 
 function Compare() {
 	return (
-		<div>
-			<div className='upload'>
-				<ul>
+		<CompareContextProvider>
+			<div className='pageContent'>
+				<UploadBox />
+				<ul className='aspectBoxAndCompareButton'>
 					<li>
-						<URLBox1 />
+						<AspectBox />
 					</li>
 					<li>
-						<FileIcon1 />
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<URLBox2 />
-					</li>
-					<li>
-						<FileIcon2 />
+						<CompareButton />
 					</li>
 				</ul>
+				<hr className='horizontalLine' />
+				<ContrastBar />
+				<div className='articlePaneBox'>
+					<ArticlePane1 />
+					<ArticlePane2 />
+				</div>
+				<Legend />
+				<hr className='horizontalLine' />
+				<Summary />
 			</div>
-			<ContrastBar percent={56} />
-
-		</div>
+		</CompareContextProvider>
 	);
 }
 
