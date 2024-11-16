@@ -13,7 +13,6 @@ import AspectBox from "./compare_components/AspectBox";
 import UploadBox from "./compare_components/UploadBox";
 import { ArticlePane1, ArticlePane2 } from "./compare_components/ArticlePane";
 
-
 function Compare() {
 	return (
 		<CompareContextProvider>
