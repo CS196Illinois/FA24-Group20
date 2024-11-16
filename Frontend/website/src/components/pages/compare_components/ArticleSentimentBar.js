@@ -1,78 +1,92 @@
-import React, { useState } from "react";
+import React from "react";
 import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
-export function ArticleSentimentBar1() {
-    const { sentimentPercent1 } = useCompareContext();
-    const [sentiment, setSentiment] = useState("");
+const sentimentLevels = [
+	"Negative Sentiment ",
+	"Moderately Negative Sentiment ",
+	"Neutral Sentiment ",
+	"Moderately Positive Sentiment ",
+	"Positive Sentiment ",
+];
 
-	var r = document.querySelector(":root");
-	var color = "";
-	var topRightBorder = "";
-	if (sentimentPercent1 >= 0) {
-		color = "#EF3D3D";
-	} else {
-		color = "#58A3F4";
+export function ArticleSentimentBar1() {
+	const { sentimentPercent1 } = useCompareContext();
+	var sentiment = '';
+	if (sentimentPercent1 < 0) {
+        ;
+    } else if (sentimentPercent1 < 20) {
+		sentiment = sentimentLevels[0];
+	} else if (sentimentPercent1 < 40) {
+		sentiment = sentimentLevels[1];
+	} else if (sentimentPercent1 < 60) {
+		sentiment = sentimentLevels[2];
+	} else if (sentimentPercent1 < 80) {
+		sentiment = sentimentLevels[3];
+	} else if (sentimentPercent1 <= 100) {
+		sentiment = sentimentLevels[4];
 	}
-	if (Math.abs(sentimentPercent1) >= 98.5) {
+	var r = document.querySelector(":root");
+	var topRightBorder = "";
+
+	if (sentimentPercent1 >= 98.5) {
 		topRightBorder = "10px";
 	} else {
 		topRightBorder = "0px";
 	}
 	r.style.setProperty("--sentiment-top-right-border1", `${topRightBorder}`);
-	if (
-		(-2 <= sentimentPercent1 && sentimentPercent1 < 0) ||
-		(0 < sentimentPercent1 && sentimentPercent1 <= 2)
-	) {
+	if (0 < sentimentPercent1 && sentimentPercent1 <= 2) {
 		r.style.setProperty("--sentiment-width1", `2%`);
 	} else {
-		r.style.setProperty("--sentiment-width1", `${Math.abs(sentimentPercent1)}%`);
+		r.style.setProperty("--sentiment-width1", `${sentimentPercent1}%`);
 	}
-	r.style.setProperty("--sentiment-color1", `${color}`);
-
+    if (sentimentPercent1 >= 0) {
+        sentiment = `${sentiment} (${sentimentPercent1}%)`
+    }
 	return (
 		<div className='sentimentContainer1'>
-			<span className='sentimentText1'>{`${sentiment} (${Math.abs(
-				sentimentPercent1
-			)}%)`}</span>
+			<span className='sentimentText1'>{sentiment}</span>
 			<div className='sentimentFiller1' />
 		</div>
 	);
 }
 
 export function ArticleSentimentBar2() {
-    const { sentimentPercent2 } = useCompareContext();
-    const [sentiment, setSentiment] = useState("");
-
-	var r = document.querySelector(":root");
-	var color = "";
-	var topRightBorder = "";
-	if (sentimentPercent2 >= 0) {
-		color = "#EF3D3D";
-	} else {
-		color = "#58A3F4";
+	const { sentimentPercent2 } = useCompareContext();
+	var sentiment = "";
+	if (sentimentPercent2 < 0) {
+        ;
+    } else if (sentimentPercent2 < 20) {
+		sentiment = sentimentLevels[0];
+	} else if (sentimentPercent2 < 40) {
+		sentiment = sentimentLevels[1];
+	} else if (sentimentPercent2 < 60) {
+		sentiment = sentimentLevels[2];
+	} else if (sentimentPercent2 < 80) {
+		sentiment = sentimentLevels[3];
+	} else if (sentimentPercent2 <= 100) {
+		sentiment = sentimentLevels[4];
 	}
-	if (Math.abs(sentimentPercent2) >= 98.5) {
+	var r = document.querySelector(":root");
+	var topRightBorder = "";
+
+	if (sentimentPercent2 >= 98.5) {
 		topRightBorder = "10px";
 	} else {
 		topRightBorder = "0px";
 	}
 	r.style.setProperty("--sentiment-top-right-border2", `${topRightBorder}`);
-	if (
-		(-2 <= sentimentPercent2 && sentimentPercent2 < 0) ||
-		(0 < sentimentPercent2 && sentimentPercent2 <= 2)
-	) {
+	if (0 < sentimentPercent2 && sentimentPercent2 <= 2) {
 		r.style.setProperty("--sentiment-width2", `2%`);
 	} else {
-		r.style.setProperty("--sentiment-width2", `${Math.abs(sentimentPercent2)}%`);
+		r.style.setProperty("--sentiment-width2", `${sentimentPercent2}%`);
 	}
-	r.style.setProperty("--sentiment-color2", `${color}`);
-
+    if (sentimentPercent2 >= 0) {
+        sentiment = `${sentiment} (${sentimentPercent2}%)`
+    }
 	return (
 		<div className='sentimentContainer2'>
-			<span className='sentimentText2'>{`${sentiment} (${Math.abs(
-				sentimentPercent2
-			)}%)`}</span>
+			<span className='sentimentText2'>{sentiment}</span>
 			<div className='sentimentFiller2' />
 		</div>
 	);

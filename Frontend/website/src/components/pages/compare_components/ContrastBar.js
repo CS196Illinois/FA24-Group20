@@ -11,8 +11,10 @@ function ContrastBar() {
 		"Moderately Strong Contrast ",
 		"Strong Contrast ",
 	];
-	var contrast = "";
-	if (contrastPercent < 20) {
+	var contrast = '';
+    if (contrastPercent < 0) {
+        contrast = 'Upload Files, Enter Aspect (Optional), and Press "Compare!"';
+    } else if (contrastPercent < 20) {
 		contrast = contrastLevels[0];
 	} else if (contrastPercent < 40) {
 		contrast = contrastLevels[1];
@@ -25,20 +27,23 @@ function ContrastBar() {
 	}
 	var r = document.querySelector(":root");
 	var rightBorder = "";
-	if (contrastPercent >= 98.5) {
+	if (contrastPercent >= 98.5 || contrastPercent < 0) {
 		rightBorder = "50px";
 	} else {
 		rightBorder = "0px";
 	}
+    if (contrastPercent >= 0) {
+        contrast = `${contrast} (${contrastPercent}%)`;
+    }
 	r.style.setProperty("--contrast-border", `${rightBorder}`);
-	if (contrastPercent < 2) {
+	if (0 < contrastPercent && contrastPercent < 2) {
 		r.style.setProperty("--contrast-width", `2%`);
 	} else {
 		r.style.setProperty("--contrast-width", `${contrastPercent}%`);
 	}
 	return (
 		<div className='contrastContainer'>
-			<span className='contrastText'>{`${contrast} (${contrastPercent}%)`}</span>
+			<span className='contrastText'>{contrast}</span>
 			<div className='contrastFiller' />
 		</div>
 	);
