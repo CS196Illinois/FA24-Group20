@@ -42,7 +42,7 @@ def scrapeURL(my_url):
     return None, None, error
 
 # Takes an HTML file and returns the heading and contents of the article
-def scrapeHTMLFile(my_html_file):
+def scrapeHTMLContent(my_html_file):
     # Retrieves the entire contents of the HTML file
     with open(my_html_file, 'r', encoding='utf-8') as file:
         page = file.read()
@@ -67,7 +67,7 @@ def scrapeHTMLFile(my_html_file):
     print(str_content)
     
     # Returns the article heading as a String and the content as a String
-    return heading, str_content
+    return heading, str_content, None
 
 # Tests: 
 # url1 = "https://apnews.com/article/trump-california-coachella-nevada-arizona-newsom-4557c2f98ffc179178fe5b6ec5bcf8aa"
