@@ -6,8 +6,38 @@ from flask import Flask, jsonify, request
 # Creates Flask application
 app = Flask(__name__)
 
-@app.route("/api/get_article", methods=["POST"])
-def get_article():
+# INPUT: HTML file
+# OUTPUT: article heading, content, error
+@app.route("/api/scrape_article", methods=["POST"])
+def scrape_article():
+    try:
+        # Retrieve JSON data
+        request_data = request.get_json()
+        html_content = request_data.get("html_content")
+
+        # Validate HTML content
+        if not html_content:
+            return jsonify({"Error": "No HTML content provided"}), 400
+
+        # Scrape and summarize
+        heading, content, error = web_scraper.scrapeHTMLContent(html_content)
+    
+        # Prepare response data
+        data = {
+            "Heading": heading,
+            "Conent": content,
+            "Error": error
+        }
+        return jsonify(data)
+
+    except Exception as e:
+        # Return detailed error message
+        return jsonify({"Error": str(e)}), 500
+
+# INPUT: HTML file
+# OUTPUT: article summary, error
+@app.route("/api/get_summary", methods=["POST"])
+def get_summary():
     try:
         # Retrieve JSON data
         request_data = request.get_json()
@@ -23,7 +53,6 @@ def get_article():
 
         # Prepare response data
         data = {
-            "Heading": heading,
             "Summary": summary,
             "Error": error
         }
