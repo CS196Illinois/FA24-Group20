@@ -44,12 +44,8 @@ def scrapeURL(my_url):
 # Takes an HTML file and returns the heading and contents of the article
 def scrapeHTMLContent(my_html_file):
     try: 
-        # Retrieves the entire contents of the HTML file
-        with open(my_html_file, 'r', encoding='utf-8') as file:
-            page = file.read()
-
         # Uses BeautifulSoup to parse raw HTML data and return desired data
-        soup = BeautifulSoup(page, 'html.parser')
+        soup = BeautifulSoup(my_html_file, 'html.parser')
     
         # Uses soup instance to find all elements for headings and page content based on tags
         heading = soup.find('h1').get_text()
@@ -69,10 +65,10 @@ def scrapeHTMLContent(my_html_file):
     
         # Returns the article heading as a String and the content as a String
         return heading, str_content, None
-    except:
-        error = 'Failed to get page contents.'
-        print("Failed to get page contents.")
-        return None, None, error
+    except Exception as e:
+        # Return detailed error message
+        print(e)
+        return None, None, e
 
 # Tests: 
 # url1 = "https://apnews.com/article/trump-california-coachella-nevada-arizona-newsom-4557c2f98ffc179178fe5b6ec5bcf8aa"
