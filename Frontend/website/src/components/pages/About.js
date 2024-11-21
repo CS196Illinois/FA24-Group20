@@ -35,33 +35,43 @@ function About() {
                 enables YOU to determine the real story.<br></br>
             </p>
             <h1 className={classes.meetCreatorsTitle}>Meet the Creators</h1>
-            <p className={classes.authorsRightSide}>Eshita</p>
-            <p className={classes.textContent3R}>
-                Hi there! I'm Eshita Kulai. I'm a freshman at<br></br>  
-                UIUC studying Computer Science and Linguistics.<br></br> 
-                My favorite part about Computer Science is the<br></br> 
-                 fact that you can make anything to you heart's<br></br>
-                desire! A part of why I got into Computer<br></br>  
-                Science was learning how Computer Science was<br></br> 
-                integrated into the current technology and how<br></br> 
-                 its used in many programs and softwares. In<br></br> 
-                the future, I see myself doing data analysis<br></br>  
-                at a tech company. I also see myself creating<br></br> 
-                video games in the future as well.<br></br> 
-            </p>
-            <p className={classes.authorsLeftSide}>Lei</p>
-            <p className={classes.textContent3L}>
-                I'm Lei, a freshman studying CS + Music. My<br></br> 
-                favorite part about CS is building projects<br></br> 
-                that have real-world applications. I first was<br></br> 
-                introduced to CS through developing silly video<br></br> 
-                games on Scratch in middle school, helping me<br></br> 
-                realize my love for building tangible and<br></br> 
-                interactive experiences. In the future, I<br></br> 
-                hope to expand upon this and combine it with<br></br> 
-                my interest in music to create new experiences<br></br> 
-                centered around sound, music, and AI.<br></br>
-            </p>
+            <div className={classes.gridLayout}>
+                <img src="https://tinyurl.com/634zx6z8"/>
+                <div>
+                    <p className={classes.authorsLeftSide}>Eshita</p>
+                    <p className={classes.textContent3R}>
+                        Hi there! I'm Eshita Kulai. I'm a freshman at<br></br>  
+                        UIUC studying Computer Science and Linguistics.<br></br> 
+                        My favorite part about Computer Science is the<br></br> 
+                        fact that you can make anything to you heart's<br></br>
+                        desire! A part of why I got into Computer<br></br>  
+                        Science was learning how Computer Science was<br></br> 
+                        integrated into the current technology and how<br></br> 
+                        its used in many programs and softwares. In<br></br> 
+                        the future, I see myself doing data analysis<br></br>  
+                        at a tech company. I also see myself creating<br></br> 
+                        video games in the future as well.<br></br> 
+                    </p>
+                </div>
+            </div>
+            <div className={classes.gridLayout}>
+                <div>
+                    <p className={classes.authorsRightSide}>Lei</p>
+                    <p className={classes.textContent3L}>
+                        I'm Lei, a freshman studying CS + Music. My<br></br> 
+                        favorite part about CS is building projects<br></br> 
+                        that have real-world applications. I first was<br></br> 
+                        introduced to CS through developing silly video<br></br> 
+                        games on Scratch in middle school, helping me<br></br> 
+                        realize my love for building tangible and<br></br> 
+                        interactive experiences. In the future, I<br></br> 
+                        hope to expand upon this and combine it with<br></br> 
+                        my interest in music to create new experiences<br></br> 
+                        centered around sound, music, and AI.<br></br>
+                    </p>
+                </div>
+                <img src="https://tinyurl.com/634zx6z8"/>
+            </div>
             <p className={classes.authorsRightSide}>Michaela</p>
             <p className={classes.textContent3R}>
                 Hello, I’m Michaela, and I am a freshman majoring in<br></br>  

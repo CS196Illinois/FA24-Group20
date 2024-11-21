@@ -9,6 +9,14 @@ body {
     width: 100%;
 }
 
+.gridLayout {
+    display: flex;
+    grid-template-columns: 150px 1fr;
+    gap: 150px;
+    padding-bottom: 40px;
+    align-items: center;
+}
+
 .titleStyle {
     color: #F2E9E4;
     font-family: "Dosis", Helvetica, sans-serif;
@@ -49,6 +57,10 @@ body {
     animation: 3s anim-lineUp ease-out;
     animation-iteration-count: 1;  
 }
+img {
+    width:40%;
+    padding-left: 50px;
+}
 
 .ourMissionStyle {
     color: #F2E9E4;
@@ -82,14 +94,13 @@ body {
 
 .authorsRightSide {
     color: #F2E9E4;
-    background-color: #2e2e37;
     font-family: "Dosis", Helvetica, sans-serif;
     font-size: 90px;
     font-weight: 300;
     text-align: right;
     display: block;
     padding-top: 40px;
-    padding-right: 80px;
+    right: 4px;
     padding-bottom: 30px; 
     animation: 3s anim-lineUp ease-out;
     animation-iteration-count: 1; 
@@ -97,14 +108,13 @@ body {
 
 .authorsLeftSide {
     color: #F2E9E4;
-    background-color: #2e2e37;
     font-family: "Dosis", Helvetica, sans-serif;
     font-size: 90px;
     font-weight: 300;
     text-align: left;
     display: block;
     padding-top: 40px;
-    padding-left: 80px;
+    padding-right: 30px;
     padding-bottom: 30px; 
     animation: 3s anim-lineUp ease-out;
     animation-iteration-count: 1; 
@@ -152,9 +162,8 @@ body {
 }
 
 .textContent3R {
-    text-align: right;
+    text-align: left;
     color: #F2E9E4;
-    background-color: #2e2e37;
     font-family: "Dosis", Helvetica, sans-serif;
     letter-spacing: 4px;
     line-height: 45px;
@@ -168,14 +177,13 @@ body {
 }
 
 .textContent3L {
-    text-align: left;
+    text-align: right;
     color: #F2E9E4;
-    background-color: #2e2e37;
     font-family: "Dosis", Helvetica, sans-serif;
     letter-spacing: 4px;
     line-height: 45px;
     font-weight: 200;
-    padding-left: 80px;
+    padding-left: 40px;
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: 25px;
