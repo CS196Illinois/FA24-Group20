@@ -1,13 +1,36 @@
 import web_scraper
 import GeminiAPI
 from flask import Flask, jsonify, request
-# import request
 
 # Creates Flask application
 app = Flask(__name__)
 
-# INPUT: HTML file
-# OUTPUT: article heading, content, error
+"""
+Description: Retrieves the article's heading and contents given an HTML file.
+
+Args: 
+    payload (JSON):
+        html_content: (string) - The entire contents of the given HTML file.
+    
+    Example:
+    {
+        "html_content": "<html><body><h1>Sample Article</h1><p>This is an example article content.</p></body></html>"
+    }
+
+Returns: 
+    JSON object containing: 
+        heading: (string) - The heading of the article.
+        content: (string) - The contents of the article.
+        error: (Exception) - Error message.
+
+    Example: 
+    {
+        "Heading": "Sample Article",
+        "Content": "This is an example article content",
+        "Error": None
+    }
+
+"""
 @app.route("/api/scrape_article", methods=["POST"])
 def scrape_article():
     try:
@@ -19,13 +42,13 @@ def scrape_article():
         if not html_content:
             return jsonify({"Error": "No HTML content provided"}), 400
 
-        # Scrape and summarize
+        # Scrape the HTML file
         heading, content, error = web_scraper.scrapeHTMLContent(html_content)
     
         # Prepare response data
         data = {
             "Heading": heading,
-            "Conent": content,
+            "Content": content,
             "Error": error
         }
         return jsonify(data)
@@ -34,27 +57,35 @@ def scrape_article():
         # Return detailed error message
         return jsonify({"Error": str(e)}), 500
 
-# INPUT: HTML file
-# OUTPUT: article summary, error
+"""
+Description: Retrieves a summary of the article given the article's contents.
+
+Args: 
+    payload (JSON):
+        scraped_content: (string) - The scraped contents of the article. 
+
+Returns: 
+    JSON object containing: 
+        summary: (Any) - The summary of the article.
+
+"""
 @app.route("/api/get_summary", methods=["POST"])
 def get_summary():
     try:
         # Retrieve JSON data
         request_data = request.get_json()
-        html_content = request_data.get("html_content")
+        scraped_content = request_data.get("scraped_content")
 
         # Validate HTML content
-        if not html_content:
+        if not scraped_content:
             return jsonify({"Error": "No HTML content provided"}), 400
 
-        # Scrape and summarize
-        heading, content, error = web_scraper.scrapeHTMLContent(html_content)
-        summary = GeminiAPI.call_gemini_api_for_summary(content)
+        # Summarize the scraped content
+        summary = GeminiAPI.call_gemini_api_for_summary(scraped_content)
 
         # Prepare response data
         data = {
             "Summary": summary,
-            "Error": error
         }
         return jsonify(data)
 
@@ -69,7 +100,7 @@ def home():
 
 # Runs Flask application
 if __name__ == "__main__":
-    app.run() # MAY NEED TO UPDATE THIS
+    app.run()
 
 """
 EXAMPLE
