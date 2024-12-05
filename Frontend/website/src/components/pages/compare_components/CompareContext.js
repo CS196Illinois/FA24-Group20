@@ -83,21 +83,21 @@ export const CompareContextProvider = ({ children }) => {
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-            "Lorem ipsum odor amet, consectetuer adipiscing elit.",
+			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 		]);
-        setHighlightItems2([
+		setHighlightItems2([
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-            "Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-            "Lorem ipsum odor amet, consectetuer adipiscing elit.",
+			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
+			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
@@ -110,7 +110,7 @@ export const CompareContextProvider = ({ children }) => {
 	};
 	const executeAnalysis = () => {
 		webscrapeFiles();
-        findHighlights();
+		findHighlights();
 		calculateContrast();
 		calculateSentiment();
 		generateSummary();

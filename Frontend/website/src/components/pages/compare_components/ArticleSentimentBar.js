@@ -12,10 +12,9 @@ const sentimentLevels = [
 
 export function ArticleSentimentBar1() {
 	const { sentimentPercent1 } = useCompareContext();
-	var sentiment = '';
+	var sentiment = "";
 	if (sentimentPercent1 < 0) {
-        ;
-    } else if (sentimentPercent1 < 20) {
+	} else if (sentimentPercent1 < 20) {
 		sentiment = sentimentLevels[0];
 	} else if (sentimentPercent1 < 40) {
 		sentiment = sentimentLevels[1];
@@ -40,9 +39,9 @@ export function ArticleSentimentBar1() {
 	} else {
 		r.style.setProperty("--sentiment-width1", `${sentimentPercent1}%`);
 	}
-    if (sentimentPercent1 >= 0) {
-        sentiment = `${sentiment} (${sentimentPercent1}%)`
-    }
+	if (sentimentPercent1 >= 0) {
+		sentiment = `${sentiment} (${sentimentPercent1}%)`;
+	}
 	return (
 		<div className='sentimentContainer1'>
 			<span className='sentimentText1'>{sentiment}</span>
@@ -55,8 +54,7 @@ export function ArticleSentimentBar2() {
 	const { sentimentPercent2 } = useCompareContext();
 	var sentiment = "";
 	if (sentimentPercent2 < 0) {
-        ;
-    } else if (sentimentPercent2 < 20) {
+	} else if (sentimentPercent2 < 20) {
 		sentiment = sentimentLevels[0];
 	} else if (sentimentPercent2 < 40) {
 		sentiment = sentimentLevels[1];
@@ -81,9 +79,9 @@ export function ArticleSentimentBar2() {
 	} else {
 		r.style.setProperty("--sentiment-width2", `${sentimentPercent2}%`);
 	}
-    if (sentimentPercent2 >= 0) {
-        sentiment = `${sentiment} (${sentimentPercent2}%)`
-    }
+	if (sentimentPercent2 >= 0) {
+		sentiment = `${sentiment} (${sentimentPercent2}%)`;
+	}
 	return (
 		<div className='sentimentContainer2'>
 			<span className='sentimentText2'>{sentiment}</span>

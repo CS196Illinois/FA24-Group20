@@ -3,7 +3,7 @@ import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
 function Summary() {
-    const { summary } = useCompareContext();
+	const { summary } = useCompareContext();
 	return (
 		<div className='summaryBox' id='scroll-text'>
 			<ul>

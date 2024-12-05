@@ -2,13 +2,8 @@ import React from "react";
 import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
-
 function CompareButton() {
-	const {
-		isFormValid,
-		executeAnalysis,
-		reset,
-	} = useCompareContext();
+	const { isFormValid, executeAnalysis, reset } = useCompareContext();
 
 	const handleSubmit = () => {
 		executeAnalysis();
