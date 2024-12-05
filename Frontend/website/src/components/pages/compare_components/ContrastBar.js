@@ -3,7 +3,7 @@ import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
 function ContrastBar() {
-    const { contrastPercent } = useCompareContext();
+	const { contrastPercent } = useCompareContext();
 	const contrastLevels = [
 		"Weak Contrast ",
 		"Moderately Weak Contrast ",
@@ -11,10 +11,11 @@ function ContrastBar() {
 		"Moderately Strong Contrast ",
 		"Strong Contrast ",
 	];
-	var contrast = '';
-    if (contrastPercent < 0) {
-        contrast = 'Upload Files, Enter Aspect (Optional), and Press "Compare!"';
-    } else if (contrastPercent < 20) {
+	var contrast = "";
+	if (contrastPercent < 0) {
+		contrast =
+			'Upload Files, Enter Topic (Optional), and Press "Compare!"';
+	} else if (contrastPercent < 20) {
 		contrast = contrastLevels[0];
 	} else if (contrastPercent < 40) {
 		contrast = contrastLevels[1];
@@ -32,9 +33,9 @@ function ContrastBar() {
 	} else {
 		rightBorder = "0px";
 	}
-    if (contrastPercent >= 0) {
-        contrast = `${contrast} (${contrastPercent}%)`;
-    }
+	if (contrastPercent >= 0) {
+		contrast = `${contrast} (${contrastPercent}%)`;
+	}
 	r.style.setProperty("--contrast-border", `${rightBorder}`);
 	if (0 < contrastPercent && contrastPercent < 2) {
 		r.style.setProperty("--contrast-width", `2%`);

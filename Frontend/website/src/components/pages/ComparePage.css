@@ -19,7 +19,7 @@ body {
 }
 
 .hyphenate {
-    hyphens: auto;
+	hyphens: auto;
 }
 
 .pageContent {
@@ -190,7 +190,7 @@ body {
 	border-radius: 50px;
 	margin-left: 3.125vw;
 	text-align: center;
-    white-space: nowrap;
+	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	box-shadow: var(--shadow);
@@ -202,8 +202,8 @@ body {
 	top: 7px;
 	color: #f2e9e4;
 	font-weight: bold;
-    padding-left: 40px;
-    padding-right: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
 	font-size-adjust: 1.3vw;
 }
 
@@ -352,7 +352,7 @@ body {
 	color: #f2e9e4;
 	padding: 15px;
 	padding-top: 5px;
-    white-space: wrap;
+	white-space: wrap;
 	overflow: auto;
 }
 
@@ -362,12 +362,12 @@ body {
 	font-size: 13px;
 	color: #f2e9e4;
 	padding-left: 20px;
-    padding-right: 2px;
-    padding-top: 5px;
+	padding-right: 2px;
+	padding-top: 5px;
 	overflow-y: auto;
-    overflow-x: hidden;
-    white-space: wrap;
-    text-overflow: clip;
+	overflow-x: hidden;
+	white-space: wrap;
+	text-overflow: clip;
 }
 
 .legendBox {

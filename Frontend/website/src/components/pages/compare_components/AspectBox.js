@@ -3,19 +3,15 @@ import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
 function AspectBox() {
-	const { isFormValid,
-		    executeAnalysis,
-		    reset,
-            aspectText,
-            setAspectText,
-    } = useCompareContext();
+	const { isFormValid, executeAnalysis, reset, aspectText, setAspectText } =
+		useCompareContext();
 	const handleChange = (event) => {
 		setAspectText(event.target.value);
 	};
 	const handleKeyDown = (event) => {
 		if (event.key === "Enter" && isFormValid) {
-            executeAnalysis();
-		    reset();
+			executeAnalysis();
+			reset();
 		}
 	};
 

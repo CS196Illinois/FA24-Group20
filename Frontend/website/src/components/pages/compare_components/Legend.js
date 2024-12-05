@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import "../ComparePage.css";
 
 function LegendPair({ color, value }) {

@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "../ComparePage.css";
 
-function URLBox({ id, placeholder }) { 
-    const [text, setText] = useState("");
+function URLBox({ id, placeholder }) {
+	const [text, setText] = useState("");
 
 	const handleChange = (event) => {
-        setText(event.target.value)
-    };
-    
+		setText(event.target.value);
+	};
+
 	return (
 		<div>
 			<input
-                className={id}
+				className={id}
 				type='text'
-                disabled={true}
+				disabled={true}
 				value={text}
 				onChange={handleChange}
 				placeholder={placeholder}

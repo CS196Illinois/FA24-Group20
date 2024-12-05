@@ -3,16 +3,16 @@ import { useCompareContext } from "./CompareContext";
 import "../ComparePage.css";
 
 function FileUpload({ id }) {
-    const fileInputRef = useRef(null);
+	const fileInputRef = useRef(null);
 	const { setFile1Handler, setFile2Handler } = useCompareContext();
 	const handleChange = (event) => {
-        const file = event.target.files[0];
+		const file = event.target.files[0];
 		if (id === "file1") {
 			setFile1Handler(file);
-            fileInputRef.current.value = '';
+			fileInputRef.current.value = "";
 		} else if (id === "file2") {
 			setFile2Handler(file);
-            fileInputRef.current.value = '';
+			fileInputRef.current.value = "";
 		}
 	};
 
@@ -30,7 +30,7 @@ function FileUpload({ id }) {
 			</label>
 			<input
 				id={id}
-                ref={fileInputRef}
+				ref={fileInputRef}
 				type='file'
 				accept='.html'
 				onChange={handleChange}
