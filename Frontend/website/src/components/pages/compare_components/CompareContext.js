@@ -77,12 +77,13 @@ export const CompareContextProvider = ({ children }) => {
     
             if (response.ok) {
                 const data = await response.json();
+                console.log("data: " + data.toString())
                 if (fileNumber === 1) {
-                    setFile1Heading(data.Header)
+                    setFile1Heading(data.Heading.toUpperCase())
                     setFile1String(data.Content)
                 }
                 if (fileNumber === 2) {
-                    setFile2Heading(data.Header)
+                    setFile2Heading(data.Heading.toUpperCase())
                     setFile2String(data.Content)
                 }
             } else {

@@ -1,11 +1,10 @@
 import web_scraper
 import GeminiAPI
 from flask import Flask, jsonify, request
-from flask_cors import CORS
 
 # Creates Flask application
 app = Flask(__name__)
-CORS(app)
+
 """
 Description: Retrieves the article's heading and contents given an HTML file.
 

@@ -2,7 +2,6 @@ import React from "react";
 import "../ComparePage.css";
 
 function HighlightList({ highlightItems }) {
-	console.log(highlightItems);
 	return (
 		<div>
 			<ul>
