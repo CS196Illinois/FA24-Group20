@@ -11,7 +11,7 @@ api_url_scrape_article = "https://biasbuster.pythonanywhere.com/api/scrape_artic
 # html_content = "<html><body><h1>Sample Article</h1><p>This is an example article content.</p></body></html>"
 
 # Retrieves the entire contents of the HTML file entitled "html_test_file.html"
-with open('html_test_file.html', 'r', encoding='utf-8') as file:
+with open('C:\\Users\\drumm\\OneDrive\\Documents\\GitHub\\FA24-Group20\\Backend\\html_test_file.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
 # JSON payload
