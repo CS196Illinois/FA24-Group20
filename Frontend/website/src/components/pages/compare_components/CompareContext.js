@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CompareContext = createContext();
 
@@ -57,52 +57,56 @@ export const CompareContextProvider = ({ children }) => {
 
 	//Implement with backend API @todo
 	async function webscrapeFile(file, fileNumber) {
+		setFile1String("");
+		setFile2String("");
 		try {
-            // Read the file content
-            const htmlContent = await file.text(); // File object supports .text() in modern Node.js environments
-    
-            // JSON payload
-            const payload = {
-                html_content: htmlContent
-            };
-    
-            // Send POST request to the API
-            const response = await fetch("https://biasbuster.pythonanywhere.com/api/scrape_article", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                console.log("data: " + data.toString())
-                if (fileNumber === 1) {
-                    setFile1Heading(data.Heading.toUpperCase())
-                    setFile1String(data.Content)
-                }
-                if (fileNumber === 2) {
-                    setFile2Heading(data.Heading.toUpperCase())
-                    setFile2String(data.Content)
-                }
-            } else {
-                console.error(`Error: ${response.status}`);
-                console.error("Response Text:", await response.text());
-            }
-        } catch (error) {
-            console.error("Network or Server Error:", error);
-        }
+			// Read the file content
+			const htmlContent = await file.text(); // File object supports .text() in modern Node.js environments
+
+			// JSON payload
+			const payload = {
+				html_content: htmlContent,
+			};
+
+			// Send POST request to the API
+			const response = await fetch(
+				"https://biasbuster.pythonanywhere.com/api/scrape_article",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(payload),
+				}
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+				if (fileNumber === 1) {
+					setFile1Heading(data.Heading.toUpperCase());
+					setFile1String(data.Content);
+				}
+				if (fileNumber === 2) {
+					setFile2Heading(data.Heading.toUpperCase());
+					setFile2String(data.Content);
+				}
+			} else {
+				console.error(`Error: ${response.status}`);
+				console.error("Response Text:", await response.text());
+			}
+		} catch (error) {
+			console.error("Network or Server Error:", error);
+		}
 	}
 
-    // if (fileNumber === 1) {
-    //     setFile1Heading(data.Header)
-    //     setFile1String(data.Content)
-    // }
-    // if (fileNumber === 2) {
-    //     setFile2Heading(data.Header)
-    //     setFile2String(data.Content)
-    // }
+	// if (fileNumber === 1) {
+	//     setFile1Heading(data.Header)
+	//     setFile1String(data.Content)
+	// }
+	// if (fileNumber === 2) {
+	//     setFile2Heading(data.Header)
+	//     setFile2String(data.Content)
+	// }
 
 	const calculateContrast = () => {
 		setContrastPercent(Math.floor(Math.random() * 99) + 1);
@@ -137,19 +141,53 @@ export const CompareContextProvider = ({ children }) => {
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
 		]);
 	};
-	const generateSummary = () => {
-		setSummary(
-			"Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ligula magna senectus vel massa neque aenean sollicitudin dignissim consequat sociosqu purus donec hac placerat cubilia suscipit ac congue sagittis suscipit condimentum consequat vel duis sollicitudin tristique felis senectus enim habitasse condimentum bibendum amet ultrices facilisi adipiscing justo dui mauris fames bibendum gravida donec donec cubilia justo taciti sem etiam tellus placerat metus mi leo sagittis ultrices vitae dapibus nullam ornare interdum praesent quam nascetur integer massa rutrum donec aenean erat magnis tellus justo orci platea dapibus risus nibh nisl fusce ante integer dictumst dignissim sodales vivamus cubilia tincidunt sem nec montes consectetur neque nullam penatibus nulla volutpat porta imperdiet cras posuere erat nullam curabitur penatibus est sed dolor suscipit velit rutrum faucibus nam dictum convallis laoreet eget. Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ligula magna senectus vel massa neque aenean sollicitudin dignissim consequat sociosqu purus donec hac placerat cubilia suscipit ac congue sagittis suscipit condimentum consequat vel duis sollicitudin tristique felis senectus enim habitasse condimentum bibendum amet ultrices facilisi adipiscing justo dui mauris fames bibendum gravida donec donec cubilia justo taciti sem etiam tellus placerat metus mi leo sagittis ultrices vitae dapibus nullam ornare interdum praesent quam nascetur integer massa rutrum donec aenean erat magnis tellus justo orci platea dapibus risus nibh nisl fusce ante integer dictumst dignissim sodales vivamus cubilia tincidunt sem nec montes consectetur neque nullam penatibus nulla volutpat porta imperdiet cras posuere erat nullam curabitur penatibus est sed dolor suscipit velit rutrum faucibus nam dictum convallis laoreet eget."
-		);
-	};
-	const executeAnalysis = () => {
-		webscrapeFile(file1, 1);
-		webscrapeFile(file2, 2);
+
+	useEffect(() => {
+		if (file1String && file2String) {
+			setSummary("Generating Summary...");
+			var inputString = "";
+			if (aspect.length >= 0) {
+				inputString =
+					"compare and contrast these two articles regarding this topic: " +
+					aspect +
+					"article 1: " +
+					file1String +
+					"article 2: " +
+					file2String;
+			} else {
+				inputString =
+					"compare and contrast these two articles: article 1: " +
+					file1String +
+					"article 2: " +
+					file2String;
+			}
+			const payload = {
+				scraped_content: inputString,
+			};
+
+			fetch("https://biasbuster.pythonanywhere.com/api/get_summary", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					setSummary(data.Summary);
+				})
+				.catch((error) =>
+					console.error("Summary generation failed", error)
+				);
+		}
+	}, [file1String, file2String, aspect]);
+
+	async function executeAnalysis() {
+		await Promise.all([webscrapeFile(file1, 1), webscrapeFile(file2, 2)]);
 		findHighlights();
 		calculateContrast();
 		calculateSentiment();
-		generateSummary();
-	};
+		reset();
+	}
+
 	return (
 		<CompareContext.Provider
 			value={{
