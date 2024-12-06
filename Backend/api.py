@@ -2,28 +2,34 @@ import web_scraper
 import GeminiAPI
 from flask import Flask, jsonify, request
 
+# UNCOMMENT THIS IF RUNNING ON SERVER
+# from flask_cors import CORS
+
+
 # Creates Flask application
 app = Flask(__name__)
+# UNCOMMENT THIS IF RUNNING ON SERVER
+# CORS(app)
 
 """
 Description: Retrieves the article's heading and contents given an HTML file.
 
-Args: 
+Args:
     payload (JSON):
         html_content: (string) - The entire contents of the given HTML file.
-    
+
     Example:
     {
         "html_content": "<html><body><h1>Sample Article</h1><p>This is an example article content.</p></body></html>"
     }
 
-Returns: 
-    JSON object containing: 
+Returns:
+    JSON object containing:
         heading: (string) - The heading of the article.
         content: (string) - The contents of the article.
         error: (Exception) - Error message.
 
-    Example: 
+    Example:
     {
         "Heading": "Sample Article",
         "Content": "This is an example article content",
@@ -44,7 +50,7 @@ def scrape_article():
 
         # Scrape the HTML file
         heading, content, error = web_scraper.scrapeHTMLContent(html_content)
-    
+
         # Prepare response data
         data = {
             "Heading": heading,
@@ -60,12 +66,12 @@ def scrape_article():
 """
 Description: Retrieves a summary of the article given the article's contents.
 
-Args: 
+Args:
     payload (JSON):
-        scraped_content: (string) - The scraped contents of the article. 
+        scraped_content: (string) - The scraped contents of the article.
 
-Returns: 
-    JSON object containing: 
+Returns:
+    JSON object containing:
         summary: (Any) - The summary of the article.
 
 """
@@ -93,6 +99,46 @@ def get_summary():
         # Return detailed error message
         return jsonify({"Error": str(e)}), 500
 
+"""
+Description: Retrieves a summary of the article given the article's contents.
+
+Args:
+    payload (JSON):
+        scraped_content: (string) - The scraped contents of the article.
+        aspect: (string) - The aspect based on which we want to analyze the article
+
+Returns:
+    JSON object containing:
+    {
+    "top_positive": a dictionary of top positive sentences to their scores
+    "top_negative": a dictionary of top negative sentences to their scores
+    "average_sentiment_score": average score for the article
+    "indices": a dictionary of sentences to a tuple of their indices (inclusive). Eg: {"sent 1": (1, 5)}
+
+    Note: for some sentences, if the indices were not found, they are set to (None, None) (or null, null)
+    }
+
+"""
+@app.route("/api/get_sentiment_scores", methods=["POST"])
+def get_sentiment_scores():
+    try:
+        # Retrieve JSON data
+        request_data = request.get_json()
+        scraped_content = request_data.get("scraped_content")
+        aspect = request_data.get("aspect")
+
+        # Validate HTML content
+        if not scraped_content:
+            return jsonify({"Error": "No HTML content provided"}), 400
+
+        # Get Sentiment Data
+        scores_data = GeminiAPI.get_sentiments(scraped_content, aspect)
+
+        return jsonify(scores_data)
+
+    except Exception as e:
+        # Return detailed error message
+        return jsonify({"Error": str(e)}), 500
 
 @app.route('/')
 def home():
