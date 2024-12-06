@@ -36,7 +36,7 @@ function About() {
 			</p>
 			<h1 className={classes.meetCreatorsTitle}>Meet the Creators</h1>
 			<div className={classes.gridLayout}>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Eshita"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Eshita"/>
 				<div>
 					<p className={classes.authorsLeftSide}>Eshita</p>
 					<p className={classes.textContent3R}>
@@ -70,10 +70,10 @@ function About() {
 						centered around sound, music, and AI.<br></br>
 					</p>
 				</div>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Lei"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Lei"/>
 			</div>
 			<div className={classes.gridLayout}>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Michaela"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Michaela"/>
 				<div>
 					<p className={classes.authorsLeftSide}>Michaela</p>
 					<p className={classes.textContent3R}>
@@ -113,10 +113,10 @@ function About() {
 						work in cybersecurity or AI.<br></br>
 					</p>
 				</div>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Rachel"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Rachel"/>
 			</div>
 			<div className={classes.gridLayout}>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Shrest"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Shrest"/>
 				<div>
 					<p className={classes.authorsLeftSide}>Shrest</p>
 					<p className={classes.textContent3R}>
@@ -156,10 +156,10 @@ function About() {
 						the field of data engineering and data science.<br></br>
 					</p>
 				</div>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Ted"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Ted"/>
 			</div>
 			<div className={classes.gridLayout}>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Lahari"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Lahari"/>
 				<div>
 					<p className={classes.authorsLeftSide}>Lahari</p>
 					<p className={classes.textContent3R}>
@@ -203,10 +203,10 @@ function About() {
 						the future.
 					</p>
 				</div>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Maryana"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Maryana"/>
 			</div>
 			<div className={classes.gridLayout}>
-				<img className='aboutImg' src='https://tinyurl.com/634zx6z8' alt="Dhanish"/>
+				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Dhanish"/>
 				<div>
 					<p className={classes.authorsLeftSide}>Dhanish</p>
 					<p className={classes.textContent3R}>
