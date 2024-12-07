@@ -55,7 +55,6 @@ export const CompareContextProvider = ({ children }) => {
 		}
 	};
 
-	//Implement with backend API @todo
 	async function webscrapeFile(file, fileNumber) {
 		setFile1String("");
 		setFile2String("");
@@ -100,15 +99,6 @@ export const CompareContextProvider = ({ children }) => {
 			console.error("Network or Server Error:", error);
 		}
 	}
-
-	// if (fileNumber === 1) {
-	//     setFile1Heading(data.Header)
-	//     setFile1String(data.Content)
-	// }
-	// if (fileNumber === 2) {
-	//     setFile2Heading(data.Header)
-	//     setFile2String(data.Content)
-	// }
 
 	const calculateContrast = () => {
 		setContrastPercent(Math.floor(Math.random() * 99) + 1);
@@ -208,7 +198,7 @@ export const CompareContextProvider = ({ children }) => {
                         console.error("Sentiment score retrieval failed for article 2", error)
                     );
 		}
-	}, [file1String, file2String, aspect]);
+	}, [file1String, file2String]);
 
 	async function executeAnalysis() {
 		await Promise.all([webscrapeFile(file1, 1), webscrapeFile(file2, 2)]);
