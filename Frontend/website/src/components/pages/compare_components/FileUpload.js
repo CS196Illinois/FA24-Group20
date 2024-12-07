@@ -21,7 +21,7 @@ function FileUpload({ id }) {
 			<label htmlFor={id}>
 				<div className='fileIconSquare'>
 					<img
-						src={require("../../../Icon.png")}
+						src={require(".//Icon.png")}
 						width='12px'
 						height='15px'
 						alt='file icon'

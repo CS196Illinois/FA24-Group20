@@ -436,7 +436,7 @@ body {
 }
 
 .summaryContent {
-	white-space: wrap;
+	white-space: pre-wrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	margin-top: 4px;

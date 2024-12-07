@@ -13,8 +13,7 @@ function ContrastBar() {
 	];
 	var contrast = "";
 	if (contrastPercent < 0) {
-		contrast =
-			'Upload Files, Enter Topic (Optional), and Press "Compare!"';
+		contrast = 'Upload Files, Enter Topic (Optional), and Press "Compare!"';
 	} else if (contrastPercent < 20) {
 		contrast = contrastLevels[0];
 	} else if (contrastPercent < 40) {
