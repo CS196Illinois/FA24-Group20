@@ -59,6 +59,8 @@ export const CompareContextProvider = ({ children }) => {
 	async function webscrapeFile(file, fileNumber) {
 		setFile1String("");
 		setFile2String("");
+        setHighlightItems1([])
+        setHighlightItems2([])
 		try {
 			// Read the file content
 			const htmlContent = await file.text(); // File object supports .text() in modern Node.js environments
@@ -112,33 +114,6 @@ export const CompareContextProvider = ({ children }) => {
 		setContrastPercent(Math.floor(Math.random() * 99) + 1);
 	};
 	
-	const findHighlights = () => {
-		setHighlightItems1([
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-		]);
-		setHighlightItems2([
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
-		]);
-	};
-
 	useEffect(() => {
 		if (file1String && file2String) {
 
@@ -197,8 +172,12 @@ export const CompareContextProvider = ({ children }) => {
 				.then((response) => response.json())
 				.then((data) => {
 					setSentimentPercent1(((data.average_sentiment_score * 50) + 50).toFixed(2))
-                    console.log(((data.average_sentiment_score * 50) + 50).toFixed(2))
-                    console.log(data.average_sentiment_score)
+                    if (!Object.keys(data.top_positive).includes("NO POSITIVE")) {
+                        setHighlightItems1(highlightItems1.concat(Object.keys(data.top_positive)))
+                    }
+                    if (!Object.keys(data.top_negative).includes("NO NEGATIVE")) {
+                        setHighlightItems1(highlightItems1.concat(Object.keys(data.top_negative)))
+                    }
 				})
 				.catch((error) =>
 					console.error("Sentiment score retrieval failed for article 1", error)
@@ -218,9 +197,12 @@ export const CompareContextProvider = ({ children }) => {
                     .then((response) => response.json())
                     .then((data) => {
                         setSentimentPercent2(((data.average_sentiment_score * 50) + 50).toFixed(2))
-                        console.log(data.average_sentiment_score)
-                        console.log(Object.keys(data.top_positive))
-                        console.log(data.top_positive[Object.keys(data.top_positive)[0]])
+                        if (!Object.keys(data.top_positive).includes("NO POSITIVE")) {
+                            setHighlightItems2(highlightItems2.concat(Object.keys(data.top_positive)))
+                        }
+                        if (!Object.keys(data.top_negative).includes("NO NEGATIVE")) {
+                            setHighlightItems2(highlightItems2.concat(Object.keys(data.top_negative)))
+                        }
                     })
                     .catch((error) =>
                         console.error("Sentiment score retrieval failed for article 2", error)
@@ -230,7 +212,6 @@ export const CompareContextProvider = ({ children }) => {
 
 	async function executeAnalysis() {
 		await Promise.all([webscrapeFile(file1, 1), webscrapeFile(file2, 2)]);
-		findHighlights();
 		calculateContrast();
 		reset();
 	}
