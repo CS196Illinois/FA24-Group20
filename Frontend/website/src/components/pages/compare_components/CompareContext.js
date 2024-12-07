@@ -111,10 +111,7 @@ export const CompareContextProvider = ({ children }) => {
 	const calculateContrast = () => {
 		setContrastPercent(Math.floor(Math.random() * 99) + 1);
 	};
-	const calculateSentiment = () => {
-		setSentimentPercent1(Math.floor(Math.random() * 99) + 1);
-		setSentimentPercent2(Math.floor(Math.random() * 99) + 1);
-	};
+	
 	const findHighlights = () => {
 		setHighlightItems1([
 			"Lorem ipsum odor amet, consectetuer adipiscing elit.",
@@ -144,7 +141,14 @@ export const CompareContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (file1String && file2String) {
+
+            // Set the summary and sentiment bars to temporary "loading" values 
+            // while waiting for the api request to return
 			setSummary("Generating Summary...");
+            setSentimentPercent1(-1);
+            setSentimentPercent2(-1);
+
+            // Get the summary of the contrast between the two articles
 			var inputString = "";
 			if (aspect.length >= 0) {
 				inputString =
@@ -161,7 +165,7 @@ export const CompareContextProvider = ({ children }) => {
 					"article 2: " +
 					file2String;
 			}
-			const payload = {
+			var payload = {
 				scraped_content: inputString,
 			};
 
@@ -172,11 +176,55 @@ export const CompareContextProvider = ({ children }) => {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					setSummary(data.Summary);
+					setSummary(data.Summary)
+                    console.log(data.Summary)
 				})
 				.catch((error) =>
 					console.error("Summary generation failed", error)
 				);
+            
+            // Get sentiment scores and highlight data for article 1
+            payload = {
+                scraped_content: file1String,
+                aspect: aspect
+            }
+            
+            fetch("https://biasbuster.pythonanywhere.com/api/get_sentiment_scores", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					setSentimentPercent1(((data.average_sentiment_score * 50) + 50).toFixed(2))
+                    console.log(((data.average_sentiment_score * 50) + 50).toFixed(2))
+                    console.log(data.average_sentiment_score)
+				})
+				.catch((error) =>
+					console.error("Sentiment score retrieval failed for article 1", error)
+				);
+            
+            // Get sentiment scores and highlight data for article 2
+            payload = {
+                scraped_content: file2String,
+                aspect: aspect
+            }
+            
+            fetch("https://biasbuster.pythonanywhere.com/api/get_sentiment_scores", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setSentimentPercent2(((data.average_sentiment_score * 50) + 50).toFixed(2))
+                        console.log(data.average_sentiment_score)
+                        console.log(Object.keys(data.top_positive))
+                        console.log(data.top_positive[Object.keys(data.top_positive)[0]])
+                    })
+                    .catch((error) =>
+                        console.error("Sentiment score retrieval failed for article 2", error)
+                    );
 		}
 	}, [file1String, file2String, aspect]);
 
@@ -184,7 +232,6 @@ export const CompareContextProvider = ({ children }) => {
 		await Promise.all([webscrapeFile(file1, 1), webscrapeFile(file2, 2)]);
 		findHighlights();
 		calculateContrast();
-		calculateSentiment();
 		reset();
 	}
 
@@ -211,7 +258,6 @@ export const CompareContextProvider = ({ children }) => {
 				setFile1Handler,
 				setFile2Handler,
 				calculateContrast,
-				calculateSentiment,
 				setAspect,
 				setAspectText,
 				executeAnalysis,
