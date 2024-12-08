@@ -240,4 +240,9 @@ if __name__ == "__main__":
 #    output = get_sentiments(article, "Trump")
 #    print(json.dumps(output, sort_keys=True, indent=2))
 
-   print(get_constrasting_score(bad_bill, good_bill, "Bill"))
+    output1 = get_sentiments(bad_bill, "Bill")
+    print(json.dumps(output1, sort_keys=True, indent=2))
+    output2 = get_sentiments(bad_bill, "Bill")
+    print(json.dumps(output2, sort_keys=True, indent=2))
+
+    print(get_constrasting_score(bad_bill, good_bill, "Bill"))
