@@ -141,9 +141,9 @@ def get_sentence_sentiment_score(phrase, telemetry):
             break
     if score['compound'] != 0:
         # return score['compound']
-        return tanh(1.5 * pi * score['compound'])
+        return tanh(24 * score['compound'])
     if telemetry:
-        print(f"{phrase} has a score of {tanh(1.5 * pi * score['compound'])}")
+        print(f"{phrase} has a score of {tanh(24 * score['compound'])}")
     return 0
 
 

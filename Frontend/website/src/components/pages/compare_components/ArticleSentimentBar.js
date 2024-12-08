@@ -14,13 +14,13 @@ export function ArticleSentimentBar1() {
 	const { sentimentPercent1 } = useCompareContext();
 	var sentiment = "";
 	if (sentimentPercent1 < 0) {
-	} else if (sentimentPercent1 < 20) {
+	} else if (sentimentPercent1 < 30) {
 		sentiment = sentimentLevels[0];
 	} else if (sentimentPercent1 < 40) {
 		sentiment = sentimentLevels[1];
 	} else if (sentimentPercent1 < 60) {
 		sentiment = sentimentLevels[2];
-	} else if (sentimentPercent1 < 80) {
+	} else if (sentimentPercent1 < 70) {
 		sentiment = sentimentLevels[3];
 	} else if (sentimentPercent1 <= 100) {
 		sentiment = sentimentLevels[4];
@@ -54,13 +54,13 @@ export function ArticleSentimentBar2() {
 	const { sentimentPercent2 } = useCompareContext();
 	var sentiment = "";
 	if (sentimentPercent2 < 0) {
-	} else if (sentimentPercent2 < 20) {
+	} else if (sentimentPercent2 < 30) {
 		sentiment = sentimentLevels[0];
 	} else if (sentimentPercent2 < 40) {
 		sentiment = sentimentLevels[1];
 	} else if (sentimentPercent2 < 60) {
 		sentiment = sentimentLevels[2];
-	} else if (sentimentPercent2 < 80) {
+	} else if (sentimentPercent2 < 70) {
 		sentiment = sentimentLevels[3];
 	} else if (sentimentPercent2 <= 100) {
 		sentiment = sentimentLevels[4];
