@@ -26,7 +26,7 @@ response_scrape_article = requests.post(api_url_scrape_article, json=payload)
 if response_scrape_article.status_code == 200:
     # Parse and print the response JSON
     data = response_scrape_article.json()
-    print("Article Content:", data)
+    print("\033[1mArticle Content:\033[0m", data)
 else:
     print(response_scrape_article)
     print(f"Error: {response_scrape_article.status_code}")
@@ -53,7 +53,7 @@ response_get_summary = requests.post(api_url_get_summary, json=payload)
 if response_get_summary.status_code == 200:
     # Parse and print the response JSON
     data = response_get_summary.json()
-    print("Article Summary:", data)
+    print("\n\n\n\033[1mArticle Summary:\033[0m", data)
 else:
     print(response_get_summary)
     print(f"Error: {response_get_summary.status_code}")
@@ -81,7 +81,7 @@ if response.status_code == 200:
     data = response.json()
     print()
     print()
-    print("Article Summary:", data)
+    print("\n\033[1mArticle Sentiment Scores:\033[0m", data)
 else:
     print(response)
     print(f"Error: {response.status_code}")
