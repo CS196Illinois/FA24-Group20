@@ -12,10 +12,10 @@ function ArticleHeading({ id }) {
 	var heading = "";
 	if (id === "article1") {
 		heading = file1Heading;
-		console.log(heading);
+		// console.log(typeof(heading) + heading);
 	} else if (id === "article2") {
 		heading = file2Heading;
-		console.log(heading);
+		// console.log(typeof(heading) + heading);
 	}
 	return (
 		<div className='articleHeadingBox'>

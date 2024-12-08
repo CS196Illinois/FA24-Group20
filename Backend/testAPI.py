@@ -32,6 +32,8 @@ else:
     print(f"Error: {response_scrape_article.status_code}")
     print(response_scrape_article.text)
 
+scraped_article = data["Content"]
+
 # ==============================================
 # ARTICLE SUMMARY:
 
@@ -41,7 +43,7 @@ api_url_get_summary = "https://biasbuster.pythonanywhere.com/api/get_summary" # 
 
 # JSON payload
 payload = {
-    "scraped_content": data["Content"]
+    "scraped_content": scraped_article
 }
 
 # Send POST request to the API
@@ -56,3 +58,31 @@ else:
     print(response_get_summary)
     print(f"Error: {response_get_summary.status_code}")
     print(response_get_summary.text)
+
+# ==============================================
+# ARTICLE SCORE:
+
+# Define the API endpoint
+# api_url_get_sentiment_scores = "http://127.0.0.1:5000/api/get_sentiment_scores" # host: local
+api_url_get_sentiment_scores = "https://biasbuster.pythonanywhere.com/api/get_sentiment_scores" # host: PythonAnywhere
+
+# JSON payload
+payload = {
+    "scraped_content": scraped_article,
+    "aspect": "Trump"
+}
+
+# Send POST request to the API
+response = requests.post(api_url_get_sentiment_scores, json=payload)
+
+# Check if the request was successful
+if response.status_code == 200:
+    # Parse and print the response JSON
+    data = response.json()
+    print()
+    print()
+    print("Article Summary:", data)
+else:
+    print(response)
+    print(f"Error: {response.status_code}")
+    print(response.text)
