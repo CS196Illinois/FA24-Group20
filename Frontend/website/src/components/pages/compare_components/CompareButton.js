@@ -3,11 +3,10 @@ import "../ComparePage.css";
 import { useCompareContext } from "./CompareContext";
 
 function CompareButton() {
-	const { isFormValid, executeAnalysis, reset } = useCompareContext();
+	const { isFormValid, executeAnalysis } = useCompareContext();
 
 	const handleSubmit = () => {
 		executeAnalysis();
-		reset();
 	};
 
 	return (
