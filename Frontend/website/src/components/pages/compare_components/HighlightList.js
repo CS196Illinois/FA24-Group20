@@ -2,7 +2,7 @@ import React from "react";
 import "../ComparePage.css";
 import Highlighter from "react-highlight-words";
 function HighlightList({highlightItems, highlightItemsPositive, highlightItemsNegative }) {
-    var highlightClassNames = new Object();
+    var highlightClassNames = {};
     highlightItemsPositive.forEach((item) => {
         highlightClassNames[item] = 'greenHighlight'
     });

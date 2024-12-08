@@ -35,7 +35,7 @@ function ArticleBody({ id }) {
 	} = useCompareContext();
 	var article = "";
 	var highlightItems = [];
-	var highlightClassNames = new Object();
+	var highlightClassNames = {};
 	if (id === "article1") {
 		article = file1String;
 		highlightItems = highlightItemsPositive1.concat(
