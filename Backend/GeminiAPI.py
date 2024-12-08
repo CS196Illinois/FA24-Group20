@@ -1,4 +1,4 @@
-from math import tanh
+from math import pi, tanh
 import google.generativeai as genai
 import os
 import nltk
@@ -141,9 +141,9 @@ def get_sentence_sentiment_score(phrase, telemetry):
             break
     if score['compound'] != 0:
         # return score['compound']
-        return tanh(3 * score['compound'])
+        return tanh(1.5 * pi * score['compound'])
     if telemetry:
-        print(f"{phrase} has a score of {tanh(3 * score['compound'])}")
+        print(f"{phrase} has a score of {tanh(1.5 * pi * score['compound'])}")
     return 0
 
 
