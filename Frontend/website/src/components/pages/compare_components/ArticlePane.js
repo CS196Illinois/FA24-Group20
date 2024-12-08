@@ -25,39 +25,83 @@ function ArticleHeading({ id }) {
 }
 
 function ArticleBody({ id }) {
-	const { file1String, file2String, highlightItems1, highlightItems2 } = useCompareContext();
+	const {
+		file1String,
+		file2String,
+		highlightItemsPositive1,
+		highlightItemsNegative1,
+		highlightItemsPositive2,
+		highlightItemsNegative2,
+	} = useCompareContext();
 	var article = "";
-    var highlightItems = []
+	var highlightItems = [];
+	var highlightClassNames = new Object();
 	if (id === "article1") {
-		article = file1String
-        highlightItems = highlightItems1
+		article = file1String;
+		highlightItems = highlightItemsPositive1.concat(
+			highlightItemsNegative1
+		);
+		highlightItemsPositive1.forEach((item) => {
+			highlightClassNames[item] = "greenHighlight";
+			console.log(item + " green");
+		});
+		highlightItemsNegative1.forEach((item) => {
+			highlightClassNames[item] = "redHighlight";
+			console.log(item + " red");
+		});
 	} else if (id === "article2") {
-		article = file2String
-        highlightItems = highlightItems2
+		article = file2String;
+		highlightItems = [];
+		highlightItems = highlightItemsPositive2.concat(
+			highlightItemsNegative2
+		);
+		highlightItemsPositive2.forEach((item) => {
+			highlightClassNames[item] = "greenHighlight";
+		});
+		highlightItemsNegative2.forEach((item) => {
+			highlightClassNames[item] = "redHighlight";
+		});
 	}
 
 	return (
-		<Highlighter 
-            className='articleBody'
-            searchWords={highlightItems}
-            autoEscape={true}
-            textToHighlight={article}
-        />
-			
+		<div className='articleBody'>
+			<Highlighter
+				searchWords={highlightItems}
+				autoEscape={true}
+				textToHighlight={article}
+				highlightClassName={highlightClassNames}
+			/>
+		</div>
 	);
 }
 
 function HighlightBox({ id }) {
-	const { highlightItems1, highlightItems2 } = useCompareContext();
-	var items = [];
+	const {
+		highlightItemsPositive1,
+		highlightItemsNegative1,
+		highlightItemsPositive2,
+		highlightItemsNegative2,
+	} = useCompareContext();
+	var items;
+	var positive = [];
+	var negative = [];
 	if (id === "article1") {
-		items = highlightItems1;
+		items = highlightItemsPositive1.concat(highlightItemsNegative1);
+		positive = highlightItemsPositive1;
+		negative = highlightItemsNegative1;
 	} else if (id === "article2") {
-		items = highlightItems2;
+		items = highlightItemsPositive2.concat(highlightItemsNegative2);
+		positive = highlightItemsPositive2;
+		negative = highlightItemsNegative2;
 	}
+
 	return (
 		<div className='highlightBox'>
-			<HighlightList highlightItems={items} />
+			<HighlightList
+				highlightItems={items}
+				highlightItemsPositive={positive}
+				highlightItemsNegative={negative}
+			/>
 		</div>
 	);
 }

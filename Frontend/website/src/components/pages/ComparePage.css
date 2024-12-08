@@ -238,6 +238,16 @@ body {
 	box-shadow: var(--shadow);
 }
 
+.greenHighlight {
+    background-color: #3c8036;
+    color: #f2e9e4;
+}
+
+.redHighlight {
+    background-color: #ad3b43;
+    color: #f2e9e4;
+}
+
 .sentimentContainer1 {
 	z-index: 1;
 	position: relative;

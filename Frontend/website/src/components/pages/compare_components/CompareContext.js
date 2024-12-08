@@ -42,8 +42,10 @@ export const CompareContextProvider = ({ children }) => {
 	const [summary, setSummary] = useState("");
 
 	// List of phrases/sentences to highlight
-	const [highlightItems1, setHighlightItems1] = useState([]);
-	const [highlightItems2, setHighlightItems2] = useState([]);
+	const [highlightItemsPositive1, setHighlightItemsPositive1] = useState([]);
+	const [highlightItemsNegative1, setHighlightItemsNegative1] = useState([]);
+	const [highlightItemsPositive2, setHighlightItemsPositive2] = useState([]);
+	const [highlightItemsNegative2, setHighlightItemsNegative2] = useState([]);
 
 	// What is displayed in the aspect box
 	const [aspectText, setAspectText] = useState("");
@@ -80,8 +82,10 @@ export const CompareContextProvider = ({ children }) => {
 	async function webscrapeFile(file, fileNumber) {
 		setFile1String("");
 		setFile2String("");
-		setHighlightItems1([]);
-		setHighlightItems2([]);
+		setHighlightItemsPositive1([]);
+		setHighlightItemsNegative1([]);
+		setHighlightItemsPositive2([]);
+		setHighlightItemsNegative2([]);
 		try {
 			// Read the file content
 			const htmlContent = await file.text(); // File object supports .text() in modern Node.js environments
@@ -170,19 +174,15 @@ export const CompareContextProvider = ({ children }) => {
 					if (
 						!Object.keys(data.top_positive).includes("NO POSITIVE")
 					) {
-						setHighlightItems1(
-							highlightItems1.concat(
-								Object.keys(data.top_positive)
-							)
+						setHighlightItemsPositive1(
+							Object.keys(data.top_positive)
 						);
 					}
 					if (
 						!Object.keys(data.top_negative).includes("NO NEGATIVE")
 					) {
-						setHighlightItems1(
-							highlightItems1.concat(
-								Object.keys(data.top_negative)
-							)
+						setHighlightItemsNegative1(
+							Object.keys(data.top_negative)
 						);
 					}
 				})
@@ -215,19 +215,15 @@ export const CompareContextProvider = ({ children }) => {
 					if (
 						!Object.keys(data.top_positive).includes("NO POSITIVE")
 					) {
-						setHighlightItems2(
-							highlightItems2.concat(
-								Object.keys(data.top_positive)
-							)
+						setHighlightItemsPositive2(
+							Object.keys(data.top_positive)
 						);
 					}
 					if (
 						!Object.keys(data.top_negative).includes("NO NEGATIVE")
 					) {
-						setHighlightItems2(
-							highlightItems2.concat(
-								Object.keys(data.top_negative)
-							)
+						setHighlightItemsNegative2(
+							Object.keys(data.top_negative)
 						);
 					}
 				})
@@ -294,8 +290,10 @@ export const CompareContextProvider = ({ children }) => {
 				contrastPercent,
 				sentimentPercent1,
 				sentimentPercent2,
-				highlightItems1,
-				highlightItems2,
+				highlightItemsPositive1,
+				highlightItemsPositive2,
+				highlightItemsNegative1,
+				highlightItemsNegative2,
 				aspect,
 				summary,
 				reset,
