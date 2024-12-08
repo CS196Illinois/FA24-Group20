@@ -61,6 +61,12 @@ body {
 .aboutImg {
 	width: 40%;
 	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.image1 {
+	align-items: center;
+	text-align: center;
 }
 
 .ourMissionStyle {
@@ -243,6 +249,16 @@ body {
 	margin-right: auto;
 	margin-top: 6%;
 	width: 9%;
+	animation: 3s anim-lineUp ease-out;
+	animation-iteration-count: 1;
+}
+.center2 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 6%;
+	margin-bottom: 6%;
+	width: 90%;
 	animation: 3s anim-lineUp ease-out;
 	animation-iteration-count: 1;
 }
