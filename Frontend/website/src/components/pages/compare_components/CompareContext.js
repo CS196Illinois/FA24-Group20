@@ -6,27 +6,49 @@ export const useCompareContext = () => {
 	return useContext(CompareContext);
 };
 
+// Context provider for storing variable states globally within the compare page
 export const CompareContextProvider = ({ children }) => {
+	// User uploaded files
 	const [file1, setFile1] = useState(null);
 	const [file2, setFile2] = useState(null);
+
+	// Label strings for displaying the upload instructions/file name
 	const [file1Label, setFile1Label] = useState(
 		`Upload Article 1 (.html) ${String.fromCodePoint(8594)}`
 	);
 	const [file2Label, setFile2Label] = useState(
 		`Upload Article 2 (.html) ${String.fromCodePoint(8594)}`
 	);
+
+	// Articles' body text
 	const [file1String, setFile1String] = useState("");
 	const [file2String, setFile2String] = useState("");
+
+	// Degree to which the two articles contrast each other
 	const [contrastPercent, setContrastPercent] = useState(-1.0);
+
+	// Sentiment analysis value of the two articles
 	const [sentimentPercent1, setSentimentPercent1] = useState(-1.0);
 	const [sentimentPercent2, setSentimentPercent2] = useState(-1.0);
+
+	// Articles' heading text
 	const [file1Heading, setFile1Heading] = useState("Article 1");
 	const [file2Heading, setFile2Heading] = useState("Article 2");
+
+	// User defined aspect
 	const [aspect, setAspect] = useState("");
+
+	// Summary of comparison between two articles
 	const [summary, setSummary] = useState("");
+
+	// List of phrases/sentences to highlight
 	const [highlightItems1, setHighlightItems1] = useState([]);
 	const [highlightItems2, setHighlightItems2] = useState([]);
+
+	// What is displayed in the aspect box
 	const [aspectText, setAspectText] = useState("");
+
+	// True if both files are uploaded and not null
 	const isFormValid = file1 && file2;
 	var r = document.querySelector(":root");
 
@@ -58,8 +80,8 @@ export const CompareContextProvider = ({ children }) => {
 	async function webscrapeFile(file, fileNumber) {
 		setFile1String("");
 		setFile2String("");
-        setHighlightItems1([])
-        setHighlightItems2([])
+		setHighlightItems1([]);
+		setHighlightItems2([]);
 		try {
 			// Read the file content
 			const htmlContent = await file.text(); // File object supports .text() in modern Node.js environments
@@ -100,20 +122,15 @@ export const CompareContextProvider = ({ children }) => {
 		}
 	}
 
-	const calculateContrast = () => {
-		setContrastPercent(Math.floor(Math.random() * 99) + 1);
-	};
-	
 	useEffect(() => {
 		if (file1String && file2String) {
-
-            // Set the summary and sentiment bars to temporary "loading" values 
-            // while waiting for the api request to return
+			// Set the summary and sentiment bars to temporary "loading" values
+			// while waiting for the api request to return
 			setSummary("Generating Summary...");
-            setSentimentPercent1(-1);
-            setSentimentPercent2(-1);
+			setSentimentPercent1(-1);
+			setSentimentPercent2(-1);
 
-            // Get the summary of the contrast between the two articles
+			// Get the summary of the contrast between the two articles
 			var inputString = "";
 			if (aspect.length >= 0) {
 				inputString =
@@ -130,7 +147,98 @@ export const CompareContextProvider = ({ children }) => {
 					"article 2: " +
 					file2String;
 			}
+
+			// Get sentiment scores and highlight data for article 1
 			var payload = {
+				scraped_content: file1String,
+				aspect: aspect,
+			};
+
+			fetch(
+				"https://biasbuster.pythonanywhere.com/api/get_sentiment_scores",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				}
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					setSentimentPercent1(
+						(data.average_sentiment_score * 50 + 50).toFixed(2)
+					);
+					if (
+						!Object.keys(data.top_positive).includes("NO POSITIVE")
+					) {
+						setHighlightItems1(
+							highlightItems1.concat(
+								Object.keys(data.top_positive)
+							)
+						);
+					}
+					if (
+						!Object.keys(data.top_negative).includes("NO NEGATIVE")
+					) {
+						setHighlightItems1(
+							highlightItems1.concat(
+								Object.keys(data.top_negative)
+							)
+						);
+					}
+				})
+				.catch((error) =>
+					console.error(
+						"Sentiment score retrieval failed for article 1",
+						error
+					)
+				);
+
+			// Get sentiment scores and highlight data for article 2
+			payload = {
+				scraped_content: file2String,
+				aspect: aspect,
+			};
+
+			fetch(
+				"https://biasbuster.pythonanywhere.com/api/get_sentiment_scores",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				}
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					setSentimentPercent2(
+						(data.average_sentiment_score * 50 + 50).toFixed(2)
+					);
+					if (
+						!Object.keys(data.top_positive).includes("NO POSITIVE")
+					) {
+						setHighlightItems2(
+							highlightItems2.concat(
+								Object.keys(data.top_positive)
+							)
+						);
+					}
+					if (
+						!Object.keys(data.top_negative).includes("NO NEGATIVE")
+					) {
+						setHighlightItems2(
+							highlightItems2.concat(
+								Object.keys(data.top_negative)
+							)
+						);
+					}
+				})
+				.catch((error) =>
+					console.error(
+						"Sentiment score retrieval failed for article 2",
+						error
+					)
+				);
+
+			payload = {
 				scraped_content: inputString,
 			};
 
@@ -141,68 +249,33 @@ export const CompareContextProvider = ({ children }) => {
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					setSummary(data.Summary)
-                    console.log(data.Summary)
+					setSummary(data.Summary);
 				})
 				.catch((error) =>
 					console.error("Summary generation failed", error)
 				);
-            
-            // Get sentiment scores and highlight data for article 1
-            payload = {
-                scraped_content: file1String,
-                aspect: aspect
-            }
-            
-            fetch("https://biasbuster.pythonanywhere.com/api/get_sentiment_scores", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(payload),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					setSentimentPercent1(((data.average_sentiment_score * 50) + 50).toFixed(2))
-                    if (!Object.keys(data.top_positive).includes("NO POSITIVE")) {
-                        setHighlightItems1(highlightItems1.concat(Object.keys(data.top_positive)))
-                    }
-                    if (!Object.keys(data.top_negative).includes("NO NEGATIVE")) {
-                        setHighlightItems1(highlightItems1.concat(Object.keys(data.top_negative)))
-                    }
-				})
-				.catch((error) =>
-					console.error("Sentiment score retrieval failed for article 1", error)
-				);
-            
-            // Get sentiment scores and highlight data for article 2
-            payload = {
-                scraped_content: file2String,
-                aspect: aspect
-            }
-            
-            fetch("https://biasbuster.pythonanywhere.com/api/get_sentiment_scores", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        setSentimentPercent2(((data.average_sentiment_score * 50) + 50).toFixed(2))
-                        if (!Object.keys(data.top_positive).includes("NO POSITIVE")) {
-                            setHighlightItems2(highlightItems2.concat(Object.keys(data.top_positive)))
-                        }
-                        if (!Object.keys(data.top_negative).includes("NO NEGATIVE")) {
-                            setHighlightItems2(highlightItems2.concat(Object.keys(data.top_negative)))
-                        }
-                    })
-                    .catch((error) =>
-                        console.error("Sentiment score retrieval failed for article 2", error)
-                    );
 		}
 	}, [file1String, file2String]);
 
+	useEffect(() => {
+		if (sentimentPercent1 >= 0 && sentimentPercent2 >= 0) {
+			console.log(sentimentPercent1);
+			console.log(sentimentPercent2);
+			setContrastPercent(
+				(
+					Math.tanh(
+						3 *
+							Math.abs(
+								(sentimentPercent1 - sentimentPercent2) / 100
+							)
+					) * 100
+				).toFixed(2)
+			);
+		}
+	}, [sentimentPercent1, sentimentPercent2]);
+
 	async function executeAnalysis() {
 		await Promise.all([webscrapeFile(file1, 1), webscrapeFile(file2, 2)]);
-		calculateContrast();
 		reset();
 	}
 
@@ -228,7 +301,6 @@ export const CompareContextProvider = ({ children }) => {
 				reset,
 				setFile1Handler,
 				setFile2Handler,
-				calculateContrast,
 				setAspect,
 				setAspectText,
 				executeAnalysis,
