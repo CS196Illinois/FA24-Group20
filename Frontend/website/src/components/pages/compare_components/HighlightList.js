@@ -1,7 +1,14 @@
 import React from "react";
 import "../ComparePage.css";
-
-function HighlightList({ highlightItems }) {
+import Highlighter from "react-highlight-words";
+function HighlightList({highlightItems, highlightItemsPositive, highlightItemsNegative }) {
+    var highlightClassNames = new Object();
+    highlightItemsPositive.forEach((item) => {
+        highlightClassNames[item] = 'greenHighlight'
+    });
+    highlightItemsNegative.forEach((item) => {
+        highlightClassNames[item] = 'redHighlight'
+    });
 	return (
 		<div>
 			<ul>
@@ -11,7 +18,15 @@ function HighlightList({ highlightItems }) {
 						key={index}
 						style={{ paddingTop: "3px", paddingBottom: "2px" }}
 					>
-						{item}
+						
+                        <Highlighter 
+                            searchWords={highlightItems}
+                            textToHighlight={item}
+                            autoEscape={true}
+                            caseSensitive={true}
+                            highlightClassName={highlightClassNames}
+                        />
+                        
 					</li>
 				))}
 			</ul>

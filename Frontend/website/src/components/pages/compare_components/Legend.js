@@ -21,17 +21,12 @@ function Legend() {
 			<ul>
 				<li></li>
 				<li>
-					<LegendPair color='#FFDA57' value='statements' />
+					<LegendPair color='green' value='positive sentiment' />
 				</li>
 				<li>
-					<LegendPair color='#4BA4ED' value='statistics' />
+					<LegendPair color='red' value='negative sentiment' />
 				</li>
-				<li>
-					<LegendPair color='#EC7ACE' value='quotes' />
-				</li>
-				<li>
-					<LegendPair color='#26EBA4' value='provocative language' />
-				</li>
+				
 				<li></li>
 			</ul>
 		</div>
