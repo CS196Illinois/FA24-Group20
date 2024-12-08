@@ -35,6 +35,7 @@ function About() {
 				enables YOU to determine the real story.<br></br>
 			</p>
 			<h1 className={classes.meetCreatorsTitle}>Meet the Creators</h1>
+			<img className={classes.center2} src={require('.//Group20_Image.png')} alt="Group Pic"></img>
 			<div className={classes.gridLayout}>
 				<img className={classes.aboutImg} src='https://tinyurl.com/634zx6z8' alt="Eshita"/>
 				<div>
