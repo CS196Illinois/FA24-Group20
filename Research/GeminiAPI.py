@@ -1,3 +1,4 @@
+from math import tanh
 import google.generativeai as genai
 import os
 import nltk
@@ -35,6 +36,17 @@ def call_gemini_api_for_summary(text_to_summarize):
     summary_text = response._result.candidates[0].content.parts[0].text
 
     return summary_text
+
+def get_constrasting_score(article1, article2, aspect):
+    output1 = get_sentiments(article1, aspect)
+    output2 = get_sentiments(article2, aspect)
+
+    avg_score1 = output1["average_sentiment_score"]
+    avg_score2 = output2["average_sentiment_score"]
+
+    contrasting_score = tanh(3 * abs(avg_score1 - avg_score2))
+
+    return contrasting_score
 
 
 """
@@ -139,12 +151,11 @@ def get_sentence_sentiment_score(phrase, telemetry):
         else:
             break
     if score['compound'] != 0:
-        return score['compound']
+        # return 2 * score['compound'] / (1.0 + abs(score['compound']))
+        return tanh(3 * score['compound'])
     if telemetry:
-        print(f"{phrase} has a score of {score}")
+        print(f"{phrase} has a score of {tanh(3 * score['compound'])}")
     return 0
-
-
 
 article = """
 ====================HEADING====================
@@ -209,6 +220,29 @@ Mark Murray is a senior political editor at NBC News.
 © 2024 NBC UNIVERSAL
 """  
 
+good_bill = """
+Bill is a capable and driven professional whose contributions have left a meaningful impact on his field. Known for his thoughtful approach to problem-solving, he combines practical know-how with a willingness to adapt to new challenges. Bill’s ventures, while not without hurdles, showcase his resilience and ability to navigate complex situations effectively.
+
+His leadership is grounded in collaboration, and his dedication to mentoring and community involvement underscores his commitment to making a positive difference. While he isn’t without flaws—like anyone, he has areas to refine—his willingness to learn and grow sets him apart as someone with considerable potential.
+
+Bill’s journey is a reminder that steady progress and a focus on improvement can lead to lasting success, even in the face of challenges.
+"""
+
+bad_bill = """
+Bill is a diligent and capable individual whose career reflects a mix of accomplishments and learning experiences. His ventures highlight a strong sense of determination and an ability to overcome obstacles, though occasional missteps have provided room for growth. Bill’s methodical approach to leadership often yields solid results, even if it sometimes takes longer to achieve his goals than planned.
+
+One of his standout qualities is his commitment to personal and professional development. He values feedback and strives to incorporate lessons learned into his work. While he may not always have the boldest ideas, his consistency and dedication to his craft earn him the respect of those around him.
+
+Ultimately, Bill exemplifies the complexities of a professional journey—marked by achievements, occasional setbacks, and a constant drive to improve.
+"""
+
 if __name__ == "__main__":
-   output = get_sentiments(article, "Trump")
-   print(json.dumps(output, sort_keys=True, indent=2))
+#    output = get_sentiments(article, "Trump")
+#    print(json.dumps(output, sort_keys=True, indent=2))
+
+    output1 = get_sentiments(bad_bill, "Bill")
+    print(json.dumps(output1, sort_keys=True, indent=2))
+    output2 = get_sentiments(bad_bill, "Bill")
+    print(json.dumps(output2, sort_keys=True, indent=2))
+
+    print(get_constrasting_score(bad_bill, good_bill, "Bill"))
