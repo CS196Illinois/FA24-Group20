@@ -6,6 +6,7 @@ import {
 } from "./ArticleSentimentBar";
 import { useCompareContext } from "./CompareContext";
 import HighlightList from "./HighlightList";
+import Highlighter from "react-highlight-words";
 
 function ArticleHeading({ id }) {
 	const { file1Heading, file2Heading } = useCompareContext();
@@ -24,15 +25,26 @@ function ArticleHeading({ id }) {
 }
 
 function ArticleBody({ id }) {
-	const { file1String, file2String } = useCompareContext();
+	const { file1String, file2String, highlightItems1, highlightItems2 } = useCompareContext();
 	var article = "";
+    var highlightItems = []
 	if (id === "article1") {
-		article = file1String;
+		article = file1String
+        highlightItems = highlightItems1
 	} else if (id === "article2") {
-		article = file2String;
+		article = file2String
+        highlightItems = highlightItems2
 	}
 
-	return <div className='articleBody'>{article}</div>;
+	return (
+		<Highlighter 
+            className='articleBody'
+            searchWords={highlightItems}
+            autoEscape={true}
+            textToHighlight={article}
+        />
+			
+	);
 }
 
 function HighlightBox({ id }) {

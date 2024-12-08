@@ -92,7 +92,7 @@ HELPER FUNCTIONS
 
 def negative_sentences(text_to_summarize, aspect):
 
-    prompt = f"""Provide the 2-10 most negatively worded phrases/sentences against {aspect} in the following text and only include them as a list separated by a new line.
+    prompt = f"""Provide the 2-10 most negatively worded phrases/sentences against {aspect} in the following text and only include them as a list separated by a new line, in the order they appear in the text.
     If the article does not contain negatively worded phrases against {aspect}, then return this exact quote: "NO NEGATIVE".
     List them exactly how they are stated in the article. Do not abbreviate with ellipses or things like "etc.". Please do not include any other information.
     Here is the article:
@@ -113,7 +113,7 @@ def negative_sentences(text_to_summarize, aspect):
 
 def positive_sentences(text_to_summarize, aspect):
 
-    prompt = f"""Provide the 2-10 most positively worded phrases/sentences with respect to {aspect} in the following text and only include them as a list separated by a new line:
+    prompt = f"""Provide the 2-10 most positively worded phrases/sentences with respect to {aspect} in the following text and only include them as a list separated by a new line, in the order they appear in the text.
     If the article does not contain positively worded phrases for {aspect}, then return this exact quote: "NO POSITIVE".
     List them exactly how they are stated in the article. Do not abbreviate with ellipses or things like "etc.". Please do not include any other information.
     Here is the article:
