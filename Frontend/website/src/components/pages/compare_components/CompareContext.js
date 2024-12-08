@@ -133,7 +133,7 @@ export const CompareContextProvider = ({ children }) => {
 			setSummary("Generating Summary...");
 			setSentimentPercent1(-1);
 			setSentimentPercent2(-1);
-
+            setContrastPercent(0);
 			// Get the summary of the contrast between the two articles
 			var inputString = "";
 			if (aspect.length >= 0) {
